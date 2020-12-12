@@ -8,6 +8,9 @@ void initialize_data(t_struct *data)
     data -> x_render_size = 0;
     data -> y_render_size = 0;
     data -> r_completed = 0;
+    data -> f_completed = 0;
+    data -> map_lenght = 0;
+
 }
 int main()
 {

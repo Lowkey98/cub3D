@@ -6,7 +6,7 @@
 /*   By: ayafdel <ayafdel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 13:35:55 by ayafdel           #+#    #+#             */
-/*   Updated: 2020/12/09 13:05:04 by ayafdel          ###   ########.fr       */
+/*   Updated: 2020/12/11 13:17:30 by ayafdel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ typedef struct  s_struct
     int x_render_size;
     int y_render_size;
     int r_completed;
+    int f_completed;
+    int map_lenght;
 } t_struct;
-void    ft_error(char *str);
+char	*ft_strjn(char *s1, char *s2);
+int empty_line(char *str);
+void    ft_error(char *message, char *str);
 int read_file(t_struct *data);
 #endif

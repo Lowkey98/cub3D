@@ -6,7 +6,7 @@
 /*   By: ayafdel <ayafdel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 16:12:23 by ayafdel           #+#    #+#             */
-/*   Updated: 2020/12/09 09:44:16 by ayafdel          ###   ########.fr       */
+/*   Updated: 2020/12/11 17:59:55 by ayafdel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,5 @@ int		ft_toupper(int n);
 void	*ft_memccpy(void *s1, const void *s2, int c, size_t n);
 void	*ft_memchr(const void *str, int c, size_t n);
 char	*ft_strjoin(char  *s1, char *s2);
+char    *ft_strcpy(char *dest, char *src);
 #endif
