@@ -165,9 +165,10 @@ int max_lenght(char **map)
 		j = 0;
 		while (map[i][j])
 		{
+			j++;
 			if (j > max)
 				max = j;
-			j++;
+			
 		}
 		i++;
 	}
@@ -178,41 +179,133 @@ void	add_spaces(t_struct *data)
 	char *tmp;
 	int i;
 	int j;
+	int tmplen;
 
 	i = 0;
 	j = 0;
-	tmp = malloc(data->map_lenght);
+	
+	while (data->map[i])
+	{
+		tmplen = data->map_lenght - ft_strlen(data->map[i]);
+		tmp = calloc(tmplen + 1,1);
+		tmp = ft_memset(tmp,' ',tmplen);
+		data -> map[i] = ft_strjoin(data -> map[i],tmp);
+		
+		i++;
+		
+
+	}
+	 
+	// tmp = ft_calloc(data->map_lenght + 1, 1);
+		// tmp = ft_strcpy(tmp,data->map[i]);
+		//ft_putstr(tmp);
+		// j = ft_strlen(data -> map[i]);
+		//ft_putnbr(j);
+		// while(j < data->map_lenght)
+		// {
+		// 	tmp[j] = 'a';
+		// 	j++;
+		// }
+	//free(data -> map[i]);
+		// data->map[i] = tmp;
+		// ft_putstr(data -> map[i]);
+		// 		ft_putstr("\n");
+    // free(tmp);
+	// while (data -> map[i])
+	// {
+	// 	printf("%s",data->map[i]);
+	// 	i++;
+	// }
+	// printf("%s",data->map[1]);
+}
+void	check_mapstr_error(char *map_str)
+{
+	int i;
+
+	i = 0;
+	while (map_str[i] == '\n')
+		i++;
+	while (map_str[i])
+	{
+		if (map_str[i] == '\n' && map_str[i + 1] == '\n')
+			ft_error("ERROR \nempty line in the map", map_str);
+		if (map_str[i] != '1' && map_str[i] != '0' && map_str[i] != ' ' && map_str[i] != '\n')
+			ft_error("ERROR \nbad character in the map", map_str);
+		i++;
+	}
+}
+void	check_map_frame(t_struct *data)
+{
+	int i;
+	int j;
+	char *comp = malloc(1);
+	i = 0;
+	j = 0;
+
 	while(data->map[i])
 	{
-		tmp = ft_strcpy(tmp,data->map[i]);
-		j = ft_strlen(tmp);
-		while(data -> map[i][j])
+		//ft_putnbr(data->map_lenght - 1);
+		if (data->map[i][0] == '0' || data -> map[i][data->map_lenght - 1] == '0')
+			ft_error("ERROR\n 0 at the edge of the map",comp);
+		i++;
+	}
+	while(data->map[0][j])
+	{
+		if (data->map[0][j] == '0' || data->map[i - 1][j] == '0')
+			ft_error("ERROR\n 0 at the edge of the map",comp);
+		j++;
+	}
+
+}
+void	check_map_error(t_struct *data)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	char *comp=malloc(1);
+	check_map_frame(data);
+	while(data ->map[i + 1])
+	{
+		j = 0;
+		while (data ->map[i + 1][j + 1])
 		{
-			tmp[j] = 'a';
+			if (data ->map[i + 1][j + 1] == '0')
+				if (data ->map[i + 1][j] == ' ' || data ->map[i][j + 1] == ' ' || data ->map[i + 1][j + 2] == ' ' || data ->map[i + 2][j + 1] == ' ')
+					ft_error("ERROR\n0 next to space",comp);
 			j++;
 		}
 		i++;
-	//free(data -> map[i]);
-	data->map[i] = tmp;
 	}
-	
-	//printf("%s",data->map[1]);
+
 }
 void	fetch_map(char *map_str, t_struct *data)
 {
-	//int i = 0;
+	int i = 0;
+		check_mapstr_error(map_str);
 		data -> map = ft_split(map_str,'\n');
 		data -> map_lenght = max_lenght(data->map);
+		add_spaces(data);
+		check_map_error(data);
+		i=0;
+		while (data -> map[i])
+		{
+			ft_putstr(data->map[i]);
+			ft_putstr("\n");
+			i++;
+		}
+		//ft_putnbr(max_lenght(data->map));
+		//ft_putnbr(data->map_lenght);
 	//ft_putstr("a");
 		//printf("%s",data->map[1]);
 			//printf("%s\n",data->map[1]);
 
-		//add_spaces(data);
-		while (data -> map[i])
-		{
-			printf("%s",data->map[i]);
-			i++;
-		}
+		// while (data -> map[i])
+		// {
+		// 	printf("%s",data->map[i]);
+		// 	i++;
+		// }
 		//printf("%d",data->map_lenght);
 		//free(map_str);
 }
@@ -224,18 +317,18 @@ int read_file(t_struct *data)
 	char *map_str;
 
 	i = 1;
-	map_str = malloc(1);
+	map_str = ft_calloc(1,1);
 	fd = open("map.cub",O_RDONLY);
 	while(i)
 	{
 		i = get_next_line(fd,&line);
-		if (!empty_line(line))
-		{		
-			if (!reached_map(data))
-				fetch_element(line, data);
+			if(!reached_map(data))
+			{
+				if(!empty_line(line))
+					fetch_element(line, data);
+			}
 			else
 				map_str = ft_strjn(map_str,line);
-		}
 	}
 	fetch_map(map_str,data);
     return (0);
