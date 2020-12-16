@@ -18,6 +18,11 @@
 # include <fcntl.h>
 # include "libft.h"
 # include <stdio.h>
+# include <mlx.h>
+
+#define RED 16711680
+#define WHITE 16777215
+#define BLACK 0
 typedef struct  s_struct
 {
     char **map;
@@ -28,8 +33,22 @@ typedef struct  s_struct
     int f_completed;
     int map_lenght;
 } t_struct;
+
+typedef struct s_lib
+{
+    void *ptr;
+    void *img;
+    void *win;
+    char *addr;
+    int  bits_per_pixel;
+    int  line_length;
+    int  endian;
+} t_lib;
+t_lib g_mlx;
 char	*ft_strjn(char *s1, char *s2);
 int empty_line(char *str);
 void    ft_error(char *message, char *str);
 int read_file(t_struct *data);
+void    render_map(t_struct *data);
+void    my_mlx_pixel_put(t_lib *g_mlx, int x, int y, int color);
 #endif
