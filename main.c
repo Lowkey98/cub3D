@@ -21,9 +21,10 @@ int main()
     g_mlx.img = mlx_new_image(g_mlx.ptr,1920,1080);
     g_mlx.addr = mlx_get_data_addr(g_mlx.img, &g_mlx.bits_per_pixel,&g_mlx.line_length,&g_mlx.endian);
     //ft_putnbr(g_mlx.line_length);
-     initialize_data(data);
-     read_file(data);
+    initialize_data(data);
+    read_file(data);
     render_map(data);
+    fetch_player_info(data);
     //my_mlx_pixel_put(&g_mlx, 10, 10,0xFF0000);
 
     mlx_put_image_to_window(g_mlx.ptr,g_mlx.win,g_mlx.img,0,0);

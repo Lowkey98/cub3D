@@ -23,6 +23,7 @@
 #define RED 16711680
 #define WHITE 16777215
 #define BLACK 0
+#define TILE_SIZE 32
 typedef struct  s_struct
 {
     char **map;
@@ -45,9 +46,26 @@ typedef struct s_lib
     int  endian;
 } t_lib;
 t_lib g_mlx;
+
+typedef struct s_player
+{
+    int exists;
+    int x;
+    int y;
+    int radius;
+    int turn_direction;
+    int walk_direction;
+    int rotation_angle;
+    int move_speed;
+    int rotation_speed;
+    char direction;
+    
+} t_player;
+t_player g_player;
+void    fetch_player_info(t_struct *data);
 char	*ft_strjn(char *s1, char *s2);
 int empty_line(char *str);
-void    ft_error(char *message, char *str);
+void    ft_error(char *message);
 int read_file(t_struct *data);
 void    render_map(t_struct *data);
 void    my_mlx_pixel_put(t_lib *g_mlx, int x, int y, int color);

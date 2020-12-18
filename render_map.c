@@ -1,18 +1,46 @@
 # include "includes/cub3d.h"
+void    fetch_player_info(t_struct *data)
+{
+    int i;
+    int j;
+
+    i = 0;
+    j = 0;
+
+    while (data->map[i])
+    {
+        j = 0;
+        while (data->map[i][j])
+        {
+            if (data->map[i][j] == 'N' || data->map[i][j] == 'S' || data->map[i][j] == 'E' ||data->map[i][j] == 'W')
+            {
+                g_player.direction = data->map[i][j];
+                g_player.x = j * TILE_SIZE + TILE_SIZE/2;
+                g_player.y = i * TILE_SIZE + TILE_SIZE/2;
+            }
+            j++;
+        }
+        i++;
+    }
+    
+    ft_putchar(g_player.direction);
+    my_mlx_pixel_put(&g_mlx, g_player.x,g_player.y,RED);
+}
 void    draw_rect(int i, int j,int color)
 {
-    int grid = 32;
     int x;
     int y;
 
     x = 0;
     y = 0;
-    while(y != grid)
+    while(y != TILE_SIZE)
     {
         x = 0;
-        while (x != grid)
+        while (x != TILE_SIZE)
         {
-            my_mlx_pixel_put(&g_mlx, (j * grid) + x,(i * grid) + y,color);
+            my_mlx_pixel_put(&g_mlx, (j * TILE_SIZE) + x,(i * TILE_SIZE) + y,color);
+            if (y == 0 || x == TILE_SIZE - 1)
+                my_mlx_pixel_put(&g_mlx, (j * TILE_SIZE) + x,(i * TILE_SIZE) + y,RED);
             x++;
         }
         y++;

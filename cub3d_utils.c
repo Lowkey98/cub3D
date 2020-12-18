@@ -43,9 +43,3 @@ int empty_line(char *str)
 	return (1);
 }
 
-void    ft_error(char *message, char *str)
-{
-    ft_putstr(message);
-    free(str);
-    exit(0);
-}

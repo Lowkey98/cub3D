@@ -143,7 +143,7 @@ void	fetch_element(char *str, t_struct *data)
 		else if(*str == 'F')
 			data -> f_completed = 1;
 		else
-			ft_error("element not known",str);
+			ft_error("element not known");
 }
 
 
@@ -218,6 +218,14 @@ void	add_spaces(t_struct *data)
 	// }
 	// printf("%s",data->map[1]);
 }
+void	check_player()
+{
+	if (g_player.exists == 0)
+		g_player.exists = 1;
+	else
+		ft_error("there should be only one player");
+	
+}
 void	check_mapstr_error(char *map_str)
 {
 	int i;
@@ -228,9 +236,11 @@ void	check_mapstr_error(char *map_str)
 	while (map_str[i])
 	{
 		if (map_str[i] == '\n' && map_str[i + 1] == '\n')
-			ft_error("ERROR \nempty line in the map", map_str);
-		if (map_str[i] != '1' && map_str[i] != '0' && map_str[i] != ' ' && map_str[i] != '\n')
-			ft_error("ERROR \nbad character in the map", map_str);
+			ft_error("ERROR \nempty line in the map");
+		if (map_str[i] == 'N' || map_str[i] == 'S' || map_str[i] == 'E' || map_str[i] == 'W')
+			check_player();
+		else if (map_str[i] != '1' && map_str[i] != '0' && map_str[i] != ' ' && map_str[i] != '\n')
+			ft_error("ERROR \nbad character in the map");
 		i++;
 	}
 }
@@ -238,7 +248,6 @@ void	check_map_frame(t_struct *data)
 {
 	int i;
 	int j;
-	char *comp = malloc(1);
 	i = 0;
 	j = 0;
 
@@ -246,13 +255,13 @@ void	check_map_frame(t_struct *data)
 	{
 		//ft_putnbr(data->map_lenght - 1);
 		if (data->map[i][0] == '0' || data -> map[i][data->map_lenght - 1] == '0')
-			ft_error("ERROR\n 0 at the edge of the map",comp);
+			ft_error("ERROR\n 0 at the edge of the map");
 		i++;
 	}
 	while(data->map[0][j])
 	{
 		if (data->map[0][j] == '0' || data->map[i - 1][j] == '0')
-			ft_error("ERROR\n 0 at the edge of the map",comp);
+			ft_error("ERROR\n 0 at the edge of the map");
 		j++;
 	}
 
@@ -264,16 +273,15 @@ void	check_map_error(t_struct *data)
 
 	i = 0;
 	j = 0;
-	char *comp=malloc(1);
 	check_map_frame(data);
 	while(data ->map[i + 1])
 	{
 		j = 0;
 		while (data ->map[i + 1][j + 1])
 		{
-			if (data ->map[i + 1][j + 1] == '0')
+			if (data ->map[i + 1][j + 1] == '0' || data ->map[i + 1][j + 1] == 'N' || data ->map[i + 1][j + 1] == 'S' || data ->map[i + 1][j + 1] == 'W' || data ->map[i + 1][j + 1] == 'E')
 				if (data ->map[i + 1][j] == ' ' || data ->map[i][j + 1] == ' ' || data ->map[i + 1][j + 2] == ' ' || data ->map[i + 2][j + 1] == ' ')
-					ft_error("ERROR\n0 next to space",comp);
+					ft_error("ERROR\n0 next to space");
 			j++;
 		}
 		i++;
