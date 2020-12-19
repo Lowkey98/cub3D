@@ -55,45 +55,42 @@ char *cut_string(char *str, char x)
 	return (str); 
 
 }
-// void	check_r(char **tab)
-// {
-// 	int j;
+void	check_r(char **tab)
+{
+	int j;
 
-// 	j = 0;
-// 	if (tab[0][1] != '\0')
-// 		ft_error("first information in resolution element has more than one character");
-// 	if (tab[3] != 0 || tab[2] == 0 || tab[1] == 0)
-// 		ft_error("you need 3 informations in resolution element");
-// 	while (tab[1][j])
-// 	{
-// 		if (!ft_isdigit(tab[1][j]))
-// 			ft_error("second information should be a number");
-// 			j++;
-// 	}
-// 	j = 0;
-// 	while (tab[2][j])
-// 	{
-// 		if (!ft_isdigit(tab[2][j]))
-// 			ft_error("third information should be a number");
-// 		j++;
-// 	}
-// }
-// char *fetch_r(char *str, t_struct *data)
-// {
-// 	char ** tmp;
+	j = 0;
+	if (tab[0][1] != '\0')
+		ft_error("first information in resolution element has more than one character");
+	if (tab[3] != 0 || tab[2] == 0 || tab[1] == 0)
+		ft_error("you need 3 informations in resolution element");
+	while (tab[1][j])
+	{
+		if (!ft_isdigit(tab[1][j]))
+			ft_error("second information should be a number");
+			j++;
+	}
+	j = 0;
+	while (tab[2][j])
+	{
+		if (!ft_isdigit(tab[2][j]))
+			ft_error("third information should be a number");
+		j++;
+	}
+}
+char *fetch_r(char *str)
+{
+	char ** tmp;
 	
-// 	tmp = ft_split(str,' ');
-// 	check_r(tmp);
-// 	data -> x_render_size = ft_atoi(tmp[1]);
-// 	data -> y_render_size = ft_atoi(tmp[2]);
-// 	free(tmp);
-// 	data -> r_completed = 1;
-// 	return (str);
-// }
-// void	check_f()
-// {
-	
-// }
+	tmp = ft_split(str,' ');
+	check_r(tmp);
+	data.window_width = ft_atoi(tmp[1]);
+	data.window_height = ft_atoi(tmp[2]);
+	free(tmp);
+	data.r_completed = 1;
+	return (str);
+}
+
 // char *fetch_f(char *str)
 // {
 // 	char ** tmp;
@@ -132,14 +129,13 @@ int	reached_map()
 // 	}
 	
 // }
-
 void	fetch_element(char *str)
 {
 	 //forcomp
 		while (*str == ' ')
 			str++;
 		if (*str == 'R')
-			data.r_completed = 1;
+			fetch_r(str);
 		else if(*str == 'F')
 			data.f_completed = 1;
 		else

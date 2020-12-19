@@ -69,7 +69,7 @@ int grid_color(int i,int j)
     // return (0);
     return (WHITE);
 }
-void    render_map()
+void    draw_map()
 {
     int i;
     int j;

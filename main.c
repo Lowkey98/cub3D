@@ -80,7 +80,7 @@ int	key_press(int key)
     
 
     //ft_putnbr(5);
-    render_map();
+    draw_map();
     move_player();
     rotate_player();
     draw_player();
@@ -102,17 +102,11 @@ int main()
     g_player.walk_direction = 0;
     initialize_data();
     read_file();
-    render_map();
+    draw_map();
     fetch_player_info();
     draw_player();
-        printf("hello");
-
-    //my_mlx_pixel_put(&g_mlx, 10, 10,0xFF0000);
     mlx_put_image_to_window(g_mlx.ptr,g_mlx.win,g_mlx.img,0,0);
-   
     mlx_hook(g_mlx.win, 2, 1L << 0, key_press, (void *)0);
-    //render_map(data);
-
     mlx_loop(g_mlx.ptr);
     return (0);
 }

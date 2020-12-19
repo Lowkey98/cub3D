@@ -33,6 +33,8 @@
 typedef struct  s_struct
 {
     char **map;
+    int window_width;
+    int window_height;
     int r_check;
     int x_render_size;
     int y_render_size;
@@ -78,6 +80,6 @@ char	*ft_strjn(char *s1, char *s2);
 int empty_line(char *str);
 void    ft_error(char *message);
 int read_file();
-void    render_map();
+void    draw_map();
 void    my_mlx_pixel_put(t_lib *g_mlx, int x, int y, int color);
 #endif
