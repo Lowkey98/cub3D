@@ -11,22 +11,42 @@ void initialize_data()
     data.f_completed = 0;
     data.map_lenght = 0;
 }
+int is_wall_at(float x, float y)
+{
+    int i;
+    int j;
+
+    i = y / TILE_SIZE;
+    j = x / TILE_SIZE;
+    if (data.map[i][j] == '1')
+        return (1);
+    return (0);
+}
 void    move_player()
 {
-    
+    float tmp_x;
+    float tmp_y;
     g_player.move_speed = 8;
     g_player.move_step = g_player.move_speed * g_player.walk_direction;
-    g_player.x += cos(g_player.rotation_angle) * g_player.move_step;
-    g_player.y += sin(g_player.rotation_angle) * g_player.move_step;
-        my_mlx_pixel_put(&g_mlx, g_player.x,g_player.y,YELLOW);
+
+    tmp_x = g_player.x + cos(g_player.rotation_angle) * g_player.move_step;
+    tmp_y = g_player.y + sin(g_player.rotation_angle) * g_player.move_step;
+    if (is_wall_at(tmp_x,tmp_y))
+        return ;
+    g_player.x = tmp_x;
+    g_player.y = tmp_y;
+    //my_mlx_pixel_put(&g_mlx, g_player.x,g_player.y,YELLOW);
+    
 
     //ft_putstr("a");
 }
+
 void   draw_player()
 {
     int i;
 
     i = 0;
+    
     my_mlx_pixel_put(&g_mlx, g_player.x,g_player.y,YELLOW);
     //players_line();
     while (i != TILE_SIZE)
