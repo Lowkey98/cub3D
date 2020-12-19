@@ -20,10 +20,16 @@
 # include <stdio.h>
 # include <mlx.h>
 
-#define RED 16711680
-#define WHITE 16777215
-#define BLACK 0
-#define TILE_SIZE 32
+# define RED 16711680
+# define WHITE 16777215
+# define BLACK 0
+# define YELLOW 16776960
+# define TILE_SIZE 32
+# define PI 3.14159265
+# define UP_ARROW 126
+# define DOWN_ARROW 125
+# define RIGHT_ARROW 124
+# define LEFT_ARROW 123
 typedef struct  s_struct
 {
     char **map;
@@ -50,18 +56,22 @@ t_lib g_mlx;
 typedef struct s_player
 {
     int exists;
-    int x;
-    int y;
+    float x;
+    float y;
     int radius;
     int turn_direction;
     int walk_direction;
-    int rotation_angle;
+    float rotation_angle;
     int move_speed;
-    int rotation_speed;
+    float rotation_speed;
     char direction;
+    float line_x;
+    float line_y;
+    float move_step;
     
 } t_player;
 t_player g_player;
+void   draw_player();
 void    fetch_player_info(t_struct *data);
 char	*ft_strjn(char *s1, char *s2);
 int empty_line(char *str);

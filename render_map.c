@@ -1,4 +1,15 @@
 # include "includes/cub3d.h"
+void    fetch_rotation_angle()
+{
+    if (g_player.direction == 'S')
+        g_player.rotation_angle = PI/2;
+    else if(g_player.direction == 'E')
+        g_player.rotation_angle = PI;
+    else if(g_player.direction == 'N')    
+        g_player.rotation_angle = 3 * PI/2;
+    else if(g_player.direction == 'W')
+        g_player.rotation_angle = 2 * PI;     
+}
 void    fetch_player_info(t_struct *data)
 {
     int i;
@@ -22,9 +33,10 @@ void    fetch_player_info(t_struct *data)
         }
         i++;
     }
-    
-    ft_putchar(g_player.direction);
-    my_mlx_pixel_put(&g_mlx, g_player.x,g_player.y,RED);
+    fetch_rotation_angle();
+    //initialize_player_info();
+
+    //ft_putchar(g_player.direction);
 }
 void    draw_rect(int i, int j,int color)
 {

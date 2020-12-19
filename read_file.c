@@ -290,19 +290,19 @@ void	check_map_error(t_struct *data)
 }
 void	fetch_map(char *map_str, t_struct *data)
 {
-	int i = 0;
+	// int i = 0;
 		check_mapstr_error(map_str);
 		data -> map = ft_split(map_str,'\n');
 		data -> map_lenght = max_lenght(data->map);
 		add_spaces(data);
 		check_map_error(data);
-		i=0;
-		while (data -> map[i])
-		{
-			ft_putstr(data->map[i]);
-			ft_putstr("\n");
-			i++;
-		}
+		// i=0;
+		// while (data -> map[i])
+		// {
+		// 	ft_putstr(data->map[i]);
+		// 	ft_putstr("\n");
+		// 	i++;
+		// }
 		//ft_putnbr(max_lenght(data->map));
 		//ft_putnbr(data->map_lenght);
 	//ft_putstr("a");
