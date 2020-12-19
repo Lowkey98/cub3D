@@ -53,7 +53,7 @@ void   draw_player()
     {
         g_player.line_x = g_player.x + (cos(g_player.rotation_angle) * i);
         g_player.line_y = g_player.y + (sin(g_player.rotation_angle) * i);
-            my_mlx_pixel_put(&g_mlx, g_player.line_x,g_player.line_y, YELLOW);
+            my_mlx_pixel_put(&g_mlx, g_player.line_x,g_player.line_y, RED);
       i++;
     }
     //my_mlx_pixel_put(&g_mlx, g_player.line_x,g_player.line_y, YELLOW);
@@ -84,6 +84,7 @@ int	key_press(int key)
     move_player();
     rotate_player();
     draw_player();
+    cast_rays();
                 //my_mlx_pixel_put(&g_mlx, 100,100, YELLOW);
     mlx_put_image_to_window(g_mlx.ptr, g_mlx.win, g_mlx.img, 0, 0);
     g_player.turn_direction = 0;
@@ -105,6 +106,7 @@ int main()
     draw_map();
     fetch_player_info();
     draw_player();
+    cast_rays();
     mlx_put_image_to_window(g_mlx.ptr,g_mlx.win,g_mlx.img,0,0);
     mlx_hook(g_mlx.win, 2, 1L << 0, key_press, (void *)0);
     mlx_loop(g_mlx.ptr);

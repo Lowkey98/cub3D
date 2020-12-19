@@ -30,6 +30,7 @@
 # define DOWN_ARROW 125
 # define RIGHT_ARROW 124
 # define LEFT_ARROW 123
+# define FOV_ANGLE 60 * PI / 180
 typedef struct  s_struct
 {
     char **map;
@@ -74,12 +75,21 @@ typedef struct s_player
     
 } t_player;
 t_player g_player;
+typedef struct s_rays
+{
+    float ray_angle;
+    float wall_hit_x;
+    float wall_hit_y;
+} t_rays;
+t_rays g_rays;
+
 void   draw_player();
 void    fetch_player_info();
 char	*ft_strjn(char *s1, char *s2);
 int empty_line(char *str);
 void    ft_error(char *message);
 int read_file();
+void    cast_rays();
 void    draw_map();
 void    my_mlx_pixel_put(t_lib *g_mlx, int x, int y, int color);
 #endif
