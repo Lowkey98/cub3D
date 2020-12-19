@@ -10,7 +10,7 @@ void    fetch_rotation_angle()
     else if(g_player.direction == 'W')
         g_player.rotation_angle = 2 * PI;     
 }
-void    fetch_player_info(t_struct *data)
+void    fetch_player_info()
 {
     int i;
     int j;
@@ -18,14 +18,14 @@ void    fetch_player_info(t_struct *data)
     i = 0;
     j = 0;
 
-    while (data->map[i])
+    while (data.map[i])
     {
         j = 0;
-        while (data->map[i][j])
+        while (data.map[i][j])
         {
-            if (data->map[i][j] == 'N' || data->map[i][j] == 'S' || data->map[i][j] == 'E' ||data->map[i][j] == 'W')
+            if (data.map[i][j] == 'N' || data.map[i][j] == 'S' || data.map[i][j] == 'E' ||data.map[i][j] == 'W')
             {
-                g_player.direction = data->map[i][j];
+                g_player.direction = data.map[i][j];
                 g_player.x = j * TILE_SIZE + TILE_SIZE/2;
                 g_player.y = i * TILE_SIZE + TILE_SIZE/2;
             }
@@ -58,30 +58,30 @@ void    draw_rect(int i, int j,int color)
         y++;
     }
 }
-int grid_color(t_struct *data,int i,int j)
+int grid_color(int i,int j)
 {
-    if (data->map[i][j] == '1')
+    if (data.map[i][j] == '1')
         return (RED);
-    if (data -> map[i][j] == '0')
+    if (data.map[i][j] == '0')
         return (WHITE);
-    if (data->map[i][j] == ' ')
+    if (data.map[i][j] == ' ')
         return (BLACK);
     // return (0);
     return (WHITE);
 }
-void    render_map(t_struct *data)
+void    render_map()
 {
     int i;
     int j;
 
     i = 0;
     j = 0;
-    while (data->map[i])
+    while (data.map[i])
     {
         j = 0;
-        while (data ->map[i][j])
+        while (data.map[i][j])
         {
-            draw_rect(i,j,grid_color(data,i,j));
+            draw_rect(i,j,grid_color(i,j));
             //my_mlx_pixel_put(&g_mlx,1,1,0xffffff);
             j++;        
             //ft_putnbr(j);

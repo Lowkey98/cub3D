@@ -40,6 +40,7 @@ typedef struct  s_struct
     int f_completed;
     int map_lenght;
 } t_struct;
+t_struct data;    
 
 typedef struct s_lib
 {
@@ -72,11 +73,11 @@ typedef struct s_player
 } t_player;
 t_player g_player;
 void   draw_player();
-void    fetch_player_info(t_struct *data);
+void    fetch_player_info();
 char	*ft_strjn(char *s1, char *s2);
 int empty_line(char *str);
 void    ft_error(char *message);
-int read_file(t_struct *data);
-void    render_map(t_struct *data);
+int read_file();
+void    render_map();
 void    my_mlx_pixel_put(t_lib *g_mlx, int x, int y, int color);
 #endif

@@ -112,9 +112,9 @@ char *cut_string(char *str, char x)
 // 	return (str + i);
 // }
 
-int	reached_map(t_struct *data)
+int	reached_map()
 {
-	if (data -> r_completed && data -> f_completed)
+	if (data.r_completed && data.f_completed)
 	{
 		//printf("%d",data->r_completed);
 		return (1);
@@ -133,15 +133,15 @@ int	reached_map(t_struct *data)
 	
 // }
 
-void	fetch_element(char *str, t_struct *data)
+void	fetch_element(char *str)
 {
 	 //forcomp
 		while (*str == ' ')
 			str++;
 		if (*str == 'R')
-			data -> r_completed = 1;
+			data.r_completed = 1;
 		else if(*str == 'F')
-			data -> f_completed = 1;
+			data.f_completed = 1;
 		else
 			ft_error("element not known");
 }
@@ -151,7 +151,7 @@ void	fetch_element(char *str, t_struct *data)
 // {
 
 // }
-int max_lenght(char **map)
+int max_lenght()
 {
 	int i;
 	int j;
@@ -160,10 +160,10 @@ int max_lenght(char **map)
 	i = 0;
 	j = 0;
 	max = 0;
-	while (map[i])
+	while (data.map[i])
 	{
 		j = 0;
-		while (map[i][j])
+		while (data.map[i][j])
 		{
 			j++;
 			if (j > max)
@@ -174,7 +174,7 @@ int max_lenght(char **map)
 	}
 	return (max);
 }
-void	add_spaces(t_struct *data)
+void	add_spaces()
 {
 	char *tmp;
 	int i;
@@ -184,12 +184,12 @@ void	add_spaces(t_struct *data)
 	i = 0;
 	j = 0;
 	
-	while (data->map[i])
+	while (data.map[i])
 	{
-		tmplen = data->map_lenght - ft_strlen(data->map[i]);
+		tmplen = data.map_lenght - ft_strlen(data.map[i]);
 		tmp = calloc(tmplen + 1,1);
 		tmp = ft_memset(tmp,' ',tmplen);
-		data -> map[i] = ft_strjoin(data -> map[i],tmp);
+		data.map[i] = ft_strjoin(data.map[i],tmp);
 		
 		i++;
 		
@@ -244,43 +244,43 @@ void	check_mapstr_error(char *map_str)
 		i++;
 	}
 }
-void	check_map_frame(t_struct *data)
+void	check_map_frame()
 {
 	int i;
 	int j;
 	i = 0;
 	j = 0;
 
-	while(data->map[i])
+	while(data.map[i])
 	{
 		//ft_putnbr(data->map_lenght - 1);
-		if (data->map[i][0] == '0' || data -> map[i][data->map_lenght - 1] == '0')
+		if (data.map[i][0] == '0' || data.map[i][data.map_lenght - 1] == '0')
 			ft_error("ERROR\n 0 at the edge of the map");
 		i++;
 	}
-	while(data->map[0][j])
+	while(data.map[0][j])
 	{
-		if (data->map[0][j] == '0' || data->map[i - 1][j] == '0')
+		if (data.map[0][j] == '0' || data.map[i - 1][j] == '0')
 			ft_error("ERROR\n 0 at the edge of the map");
 		j++;
 	}
 
 }
-void	check_map_error(t_struct *data)
+void	check_map_error()
 {
 	int i;
 	int j;
 
 	i = 0;
 	j = 0;
-	check_map_frame(data);
-	while(data ->map[i + 1])
+	check_map_frame();
+	while(data.map[i + 1])
 	{
 		j = 0;
-		while (data ->map[i + 1][j + 1])
+		while (data.map[i + 1][j + 1])
 		{
-			if (data ->map[i + 1][j + 1] == '0' || data ->map[i + 1][j + 1] == 'N' || data ->map[i + 1][j + 1] == 'S' || data ->map[i + 1][j + 1] == 'W' || data ->map[i + 1][j + 1] == 'E')
-				if (data ->map[i + 1][j] == ' ' || data ->map[i][j + 1] == ' ' || data ->map[i + 1][j + 2] == ' ' || data ->map[i + 2][j + 1] == ' ')
+			if (data.map[i + 1][j + 1] == '0' || data.map[i + 1][j + 1] == 'N' || data.map[i + 1][j + 1] == 'S' || data.map[i + 1][j + 1] == 'W' || data.map[i + 1][j + 1] == 'E')
+				if (data.map[i + 1][j] == ' ' || data.map[i][j + 1] == ' ' || data.map[i + 1][j + 2] == ' ' || data.map[i + 2][j + 1] == ' ')
 					ft_error("ERROR\n0 next to space");
 			j++;
 		}
@@ -288,14 +288,14 @@ void	check_map_error(t_struct *data)
 	}
 
 }
-void	fetch_map(char *map_str, t_struct *data)
+void	fetch_map(char *map_str)
 {
 	// int i = 0;
 		check_mapstr_error(map_str);
-		data -> map = ft_split(map_str,'\n');
-		data -> map_lenght = max_lenght(data->map);
-		add_spaces(data);
-		check_map_error(data);
+		data.map = ft_split(map_str,'\n');
+		data.map_lenght = max_lenght();
+		add_spaces();
+		check_map_error();
 		// i=0;
 		// while (data -> map[i])
 		// {
@@ -317,7 +317,7 @@ void	fetch_map(char *map_str, t_struct *data)
 		//printf("%d",data->map_lenght);
 		//free(map_str);
 }
-int read_file(t_struct *data)
+int read_file()
 {
 	char *line;
 	int fd;
@@ -330,14 +330,14 @@ int read_file(t_struct *data)
 	while(i)
 	{
 		i = get_next_line(fd,&line);
-			if(!reached_map(data))
+			if(!reached_map())
 			{
 				if(!empty_line(line))
-					fetch_element(line, data);
+					fetch_element(line);
 			}
 			else
 				map_str = ft_strjn(map_str,line);
 	}
-	fetch_map(map_str,data);
+	fetch_map(map_str);
     return (0);
 }   
