@@ -18,14 +18,14 @@ void    fetch_player_info()
     i = 0;
     j = 0;
 
-    while (data.map[i])
+    while (g_data.map[i])
     {
         j = 0;
-        while (data.map[i][j])
+        while (g_data.map[i][j])
         {
-            if (data.map[i][j] == 'N' || data.map[i][j] == 'S' || data.map[i][j] == 'E' ||data.map[i][j] == 'W')
+            if (g_data.map[i][j] == 'N' || g_data.map[i][j] == 'S' || g_data.map[i][j] == 'E' ||g_data.map[i][j] == 'W')
             {
-                g_player.direction = data.map[i][j];
+                g_player.direction = g_data.map[i][j];
                 g_player.x = j * TILE_SIZE + TILE_SIZE/2;
                 g_player.y = i * TILE_SIZE + TILE_SIZE/2;
             }
@@ -60,11 +60,11 @@ void    draw_rect(int i, int j,int color)
 }
 int grid_color(int i,int j)
 {
-    if (data.map[i][j] == '1')
+    if (g_data.map[i][j] == '1')
         return (RED);
-    if (data.map[i][j] == '0')
+    if (g_data.map[i][j] == '0')
         return (WHITE);
-    if (data.map[i][j] == ' ')
+    if (g_data.map[i][j] == ' ')
         return (BLACK);
     // return (0);
     return (WHITE);
@@ -76,10 +76,10 @@ void    draw_map()
 
     i = 0;
     j = 0;
-    while (data.map[i])
+    while (g_data.map[i])
     {
         j = 0;
-        while (data.map[i][j])
+        while (g_data.map[i][j])
         {
             draw_rect(i,j,grid_color(i,j));
             //my_mlx_pixel_put(&g_mlx,1,1,0xffffff);

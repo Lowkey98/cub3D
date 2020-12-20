@@ -4,12 +4,12 @@
 
 void initialize_data()
 {
-    data.map = 0;
-    data.x_render_size = 0;
-    data.y_render_size = 0;
-    data.r_completed = 0;
-    data.f_completed = 0;
-    data.map_lenght = 0;
+    g_data.map = 0;
+    g_data.x_render_size = 0;
+    g_data.y_render_size = 0;
+    g_data.r_completed = 0;
+    g_data.f_completed = 0;
+    g_data.map_lenght = 0;
 }
 int is_wall_at(float x, float y)
 {
@@ -18,7 +18,7 @@ int is_wall_at(float x, float y)
 
     i = y / TILE_SIZE;
     j = x / TILE_SIZE;
-    if (data.map[i][j] == '1')
+    if (g_data.map[i][j] == '1')
         return (1);
     return (0);
 }
@@ -47,7 +47,7 @@ void   draw_player()
 
     i = 0;
     
-    my_mlx_pixel_put(&g_mlx, g_player.x,g_player.y,YELLOW);
+    //my_mlx_pixel_put(&g_mlx, g_player.x,g_player.y,YELLOW);
     //players_line();
     while (i != TILE_SIZE)
     {
@@ -93,19 +93,21 @@ int	key_press(int key)
     return (0);
 }
 int main()
-{
+{  
+    initialize_data();
+    read_file();
     g_mlx.ptr = mlx_init();
-    g_mlx.win = mlx_new_window(g_mlx.ptr,1920,1080,"cub3d");
-    g_mlx.img = mlx_new_image(g_mlx.ptr,1920,1080);
+    g_mlx.win = mlx_new_window(g_mlx.ptr, g_data.window_height  ,g_data.window_width,"cub3d");
+    g_mlx.img = mlx_new_image(g_mlx.ptr,g_data.window_height,g_data.window_width);
     g_mlx.addr = mlx_get_data_addr(g_mlx.img, &g_mlx.bits_per_pixel,&g_mlx.line_length,&g_mlx.endian);
     //ft_putnbr(g_mlx.line_length);
     g_player.turn_direction = 0;
     g_player.walk_direction = 0;
-    initialize_data();
-    read_file();
+  
     draw_map();
     fetch_player_info();
     draw_player();
+    g_rays = malloc(g_data.window_width * sizeof(g_rays));
     cast_rays();
     mlx_put_image_to_window(g_mlx.ptr,g_mlx.win,g_mlx.img,0,0);
     mlx_hook(g_mlx.win, 2, 1L << 0, key_press, (void *)0);

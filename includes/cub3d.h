@@ -43,7 +43,7 @@ typedef struct  s_struct
     int f_completed;
     int map_lenght;
 } t_struct;
-t_struct data;    
+t_struct g_data;    
 
 typedef struct s_lib
 {
@@ -80,8 +80,12 @@ typedef struct s_rays
     float ray_angle;
     float wall_hit_x;
     float wall_hit_y;
+    int is_ray_facing_down;
+    int is_ray_facing_up;
+    int is_ray_facing_right;
+    int is_ray_facing_left;
 } t_rays;
-t_rays g_rays;
+t_rays *g_rays;
 
 void   draw_player();
 void    fetch_player_info();

@@ -14,10 +14,10 @@ char *fetch_file(char *str)
         str = ft_strjn(str,buff);
     return (str);
 }
-int		reach_map(t_struct *data)
+int		reach_map(t_struct *g_data)
 {
-	data = 0;
-	//if(data -> r_check)
+	g_data = 0;
+	//if(g_data -> r_check)
 		//return (1);
 		return (0);
 }
@@ -84,10 +84,10 @@ char *fetch_r(char *str)
 	
 	tmp = ft_split(str,' ');
 	check_r(tmp);
-	data.window_width = ft_atoi(tmp[1]);
-	data.window_height = ft_atoi(tmp[2]);
+	g_data.window_width = ft_atoi(tmp[1]);
+	g_data.window_height = ft_atoi(tmp[2]);
 	free(tmp);
-	data.r_completed = 1;
+	g_data.r_completed = 1;
 	return (str);
 }
 
@@ -111,20 +111,20 @@ char *fetch_r(char *str)
 
 int	reached_map()
 {
-	if (data.r_completed && data.f_completed)
+	if (g_data.r_completed && g_data.f_completed)
 	{
-		//printf("%d",data->r_completed);
+		//printf("%d",g_data->r_completed);
 		return (1);
 	}
-			//printf("%d",data->r_completed);
+			//printf("%d",g_data->r_completed);
 
 	return (0);
 }
-// void    fetch_data(char *str, t_struct *data)
+// void    fetch_data(char *str, t_struct *g_data)
 // {
-//     while(!reached_map(data))
+//     while(!reached_map(g_data))
 // 	{
-// 		str = fetch_element(str, data);
+// 		str = fetch_element(str, g_data);
 // 		///printf("a");
 // 	}
 	
@@ -137,13 +137,13 @@ void	fetch_element(char *str)
 		if (*str == 'R')
 			fetch_r(str);
 		else if(*str == 'F')
-			data.f_completed = 1;
+			g_data.f_completed = 1;
 		else
 			ft_error("element not known");
 }
 
 
-// void	add_spaces(t_struct data)
+// void	add_spaces(t_struct g_data)
 // {
 
 // }
@@ -156,10 +156,10 @@ int max_lenght()
 	i = 0;
 	j = 0;
 	max = 0;
-	while (data.map[i])
+	while (g_data.map[i])
 	{
 		j = 0;
-		while (data.map[i][j])
+		while (g_data.map[i][j])
 		{
 			j++;
 			if (j > max)
@@ -180,39 +180,39 @@ void	add_spaces()
 	i = 0;
 	j = 0;
 	
-	while (data.map[i])
+	while (g_data.map[i])
 	{
-		tmplen = data.map_lenght - ft_strlen(data.map[i]);
+		tmplen = g_data.map_lenght - ft_strlen(g_data.map[i]);
 		tmp = calloc(tmplen + 1,1);
 		tmp = ft_memset(tmp,' ',tmplen);
-		data.map[i] = ft_strjoin(data.map[i],tmp);
+		g_data.map[i] = ft_strjoin(g_data.map[i],tmp);
 		
 		i++;
 		
 
 	}
 	 
-	// tmp = ft_calloc(data->map_lenght + 1, 1);
-		// tmp = ft_strcpy(tmp,data->map[i]);
+	// tmp = ft_calloc(g_data->map_lenght + 1, 1);
+		// tmp = ft_strcpy(tmp,g_data->map[i]);
 		//ft_putstr(tmp);
-		// j = ft_strlen(data -> map[i]);
+		// j = ft_strlen(g_data -> map[i]);
 		//ft_putnbr(j);
-		// while(j < data->map_lenght)
+		// while(j < g_data->map_lenght)
 		// {
 		// 	tmp[j] = 'a';
 		// 	j++;
 		// }
-	//free(data -> map[i]);
-		// data->map[i] = tmp;
-		// ft_putstr(data -> map[i]);
+	//free(g_data -> map[i]);
+		// g_data->map[i] = tmp;
+		// ft_putstr(g_data -> map[i]);
 		// 		ft_putstr("\n");
     // free(tmp);
-	// while (data -> map[i])
+	// while (g_data -> map[i])
 	// {
-	// 	printf("%s",data->map[i]);
+	// 	printf("%s",g_data->map[i]);
 	// 	i++;
 	// }
-	// printf("%s",data->map[1]);
+	// printf("%s",g_data->map[1]);
 }
 void	check_player()
 {
@@ -247,16 +247,16 @@ void	check_map_frame()
 	i = 0;
 	j = 0;
 
-	while(data.map[i])
+	while(g_data.map[i])
 	{
-		//ft_putnbr(data->map_lenght - 1);
-		if (data.map[i][0] == '0' || data.map[i][data.map_lenght - 1] == '0')
+		//ft_putnbr(g_data->map_lenght - 1);
+		if (g_data.map[i][0] == '0' || g_data.map[i][g_data.map_lenght - 1] == '0')
 			ft_error("ERROR\n 0 at the edge of the map");
 		i++;
 	}
-	while(data.map[0][j])
+	while(g_data.map[0][j])
 	{
-		if (data.map[0][j] == '0' || data.map[i - 1][j] == '0')
+		if (g_data.map[0][j] == '0' || g_data.map[i - 1][j] == '0')
 			ft_error("ERROR\n 0 at the edge of the map");
 		j++;
 	}
@@ -270,13 +270,13 @@ void	check_map_error()
 	i = 0;
 	j = 0;
 	check_map_frame();
-	while(data.map[i + 1])
+	while(g_data.map[i + 1])
 	{
 		j = 0;
-		while (data.map[i + 1][j + 1])
+		while (g_data.map[i + 1][j + 1])
 		{
-			if (data.map[i + 1][j + 1] == '0' || data.map[i + 1][j + 1] == 'N' || data.map[i + 1][j + 1] == 'S' || data.map[i + 1][j + 1] == 'W' || data.map[i + 1][j + 1] == 'E')
-				if (data.map[i + 1][j] == ' ' || data.map[i][j + 1] == ' ' || data.map[i + 1][j + 2] == ' ' || data.map[i + 2][j + 1] == ' ')
+			if (g_data.map[i + 1][j + 1] == '0' || g_data.map[i + 1][j + 1] == 'N' || g_data.map[i + 1][j + 1] == 'S' || g_data.map[i + 1][j + 1] == 'W' || g_data.map[i + 1][j + 1] == 'E')
+				if (g_data.map[i + 1][j] == ' ' || g_data.map[i][j + 1] == ' ' || g_data.map[i + 1][j + 2] == ' ' || g_data.map[i + 2][j + 1] == ' ')
 					ft_error("ERROR\n0 next to space");
 			j++;
 		}
@@ -288,29 +288,29 @@ void	fetch_map(char *map_str)
 {
 	// int i = 0;
 		check_mapstr_error(map_str);
-		data.map = ft_split(map_str,'\n');
-		data.map_lenght = max_lenght();
+		g_data.map = ft_split(map_str,'\n');
+		g_data.map_lenght = max_lenght();
 		add_spaces();
 		check_map_error();
 		// i=0;
-		// while (data -> map[i])
+		// while (g_data -> map[i])
 		// {
-		// 	ft_putstr(data->map[i]);
+		// 	ft_putstr(g_data->map[i]);
 		// 	ft_putstr("\n");
 		// 	i++;
 		// }
-		//ft_putnbr(max_lenght(data->map));
-		//ft_putnbr(data->map_lenght);
+		//ft_putnbr(max_lenght(g_data->map));
+		//ft_putnbr(g_data->map_lenght);
 	//ft_putstr("a");
-		//printf("%s",data->map[1]);
-			//printf("%s\n",data->map[1]);
+		//printf("%s",g_data->map[1]);
+			//printf("%s\n",g_data->map[1]);
 
-		// while (data -> map[i])
+		// while (g_data -> map[i])
 		// {
-		// 	printf("%s",data->map[i]);
+		// 	printf("%s",g_data->map[i]);
 		// 	i++;
 		// }
-		//printf("%d",data->map_lenght);
+		//printf("%d",g_data->map_lenght);
 		//free(map_str);
 }
 int read_file()
