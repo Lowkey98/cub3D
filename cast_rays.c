@@ -12,16 +12,26 @@ void    cast_ray()
       i++;
     }
 }
+void    normalize_angle()
+{
+    g_rays.ray_angle = remainderf(g_rays.ray_angle,(2 * PI));
+    if (g_rays.ray_angle < 0)
+        g_rays.ray_angle = (2 * PI) + g_rays.ray_angle;
+}
 void    cast_rays()
 {
     int i;
 
     i = 0;
+    //normalize_angle();
     g_rays.ray_angle = g_player.rotation_angle - (FOV_ANGLE/2);
-    while (i < data.window_width)
-    {
+    normalize_angle();
+
+    printf("%f\n",g_rays.ray_angle);
+    //while (i < data.window_width)
+    //{
         cast_ray();
-        g_rays.ray_angle += FOV_ANGLE / data.window_width;
-        i++;
-    }
+        //g_rays.ray_angle += FOV_ANGLE / data.window_width;
+        //i++;
+    //}
 }
