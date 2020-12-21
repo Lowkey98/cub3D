@@ -92,6 +92,10 @@ typedef struct s_rays
     float wall_hit_v_y;
     float next_h_x;
     float next_h_y;
+    float next_v_x;
+    float next_v_y;
+    int found_h_wall;
+    int found_v_wall;
     float x_step;
     float y_step;
 } t_rays;
