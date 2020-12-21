@@ -84,14 +84,25 @@ typedef struct s_rays
     int is_ray_facing_up;
     int is_ray_facing_right;
     int is_ray_facing_left;
+    float x_intercept;
+    float y_intercept;
+    float wall_hit_h_x;
+    float wall_hit_h_y;
+    float wall_hit_v_x;
+    float wall_hit_v_y;
+    float next_h_x;
+    float next_h_y;
+    float x_step;
+    float y_step;
 } t_rays;
 t_rays *g_rays;
-
+void    draw_line(float x_one,float y_one,float x_zero,float y_zero);
 void   draw_player();
 void    fetch_player_info();
 char	*ft_strjn(char *s1, char *s2);
 int empty_line(char *str);
 void    ft_error(char *message);
+int is_wall_at(float x, float y);
 int read_file();
 void    cast_rays();
 void    draw_map();

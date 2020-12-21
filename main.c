@@ -109,6 +109,7 @@ int main()
     draw_player();
     g_rays = malloc(g_data.window_width * sizeof(g_rays));
     cast_rays();
+    draw_line(200,200,100,100);
     mlx_put_image_to_window(g_mlx.ptr,g_mlx.win,g_mlx.img,0,0);
     mlx_hook(g_mlx.win, 2, 1L << 0, key_press, (void *)0);
     mlx_loop(g_mlx.ptr);
