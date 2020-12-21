@@ -42,6 +42,7 @@ typedef struct  s_struct
     int r_completed;
     int f_completed;
     int map_lenght;
+    int map_height;
 } t_struct;
 t_struct g_data;    
 
@@ -98,6 +99,8 @@ typedef struct s_rays
     int found_v_wall;
     float x_step;
     float y_step;
+    float h_distance;
+    float v_distance;
 } t_rays;
 t_rays *g_rays;
 void    draw_line(float x_one,float y_one,float x_zero,float y_zero);

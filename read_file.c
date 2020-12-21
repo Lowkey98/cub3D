@@ -313,6 +313,15 @@ void	fetch_map(char *map_str)
 		//printf("%d",g_data->map_lenght);
 		//free(map_str);
 }
+int map_height()
+{
+	int i;
+	i = 0;
+
+	while(g_data.map[i])
+		i++;
+	return (i);
+}
 int read_file()
 {
 	char *line;
@@ -335,5 +344,6 @@ int read_file()
 				map_str = ft_strjn(map_str,line);
 	}
 	fetch_map(map_str);
+	g_data.map_height = map_height();
     return (0);
 }   
