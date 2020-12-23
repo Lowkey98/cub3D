@@ -14,9 +14,9 @@ void    cast_ray(int ray_i)
 }
 void    normalize_angle(int ray_i)
 {
-    g_rays[ray_i].ray_angle = remainderf(g_rays->ray_angle,(2 * PI));
+    g_rays[ray_i].ray_angle = remainderf(g_rays[ray_i].ray_angle,(2 * PI));
     if (g_rays[ray_i].ray_angle < 0)
-        g_rays[ray_i].ray_angle = (2 * PI) + g_rays->ray_angle;
+        g_rays[ray_i].ray_angle = (2 * PI) + g_rays[ray_i].ray_angle;
 }
 void ray_facing(int ray_i)
 {
@@ -158,8 +158,8 @@ void    vertical_cast(int ray_i)
         }
         
     }
-    printf("%d\n",g_rays[ray_i].found_v_wall);
-    printf("%d\n",g_rays[ray_i].found_h_wall);
+    // printf("%d\n",g_rays[ray_i].found_v_wall);
+    // printf("%d\n",g_rays[ray_i].found_h_wall);
 
 }    
 
@@ -192,29 +192,37 @@ void    shortest_cast(int ray_i)
         g_rays[ray_i].wall_hit_x = g_rays[ray_i].wall_hit_v_x;
         g_rays[ray_i].wall_hit_y = g_rays[ray_i].wall_hit_v_y;
     }
-    printf("%f\n",g_rays[ray_i].v_distance);
-    printf("%f\n",g_rays[ray_i].h_distance);
+    // printf("%f\n",g_rays[ray_i].v_distance);
+    // printf("%f\n",g_rays[ray_i].h_distance);
 }
 void    cast_rays()
 {
     int ray_i;
 
     ray_i = 0;
-    //normalize_angle();
+    //normalize_angle();        
 
-    g_rays[ray_i].ray_angle = g_player.rotation_angle - (FOV_ANGLE/2);
-    normalize_angle(ray_i); 
-    ray_facing(ray_i);
-    initialize_cast_data(ray_i);
-    horizontal_cast(ray_i);
-    vertical_cast(ray_i);
-    shortest_cast(ray_i);
 
-   
-    //printf("1---- %f \n",g_rays[ray_i].wall_hit_h_x);
-    //printf("1---- %f \n",g_rays[ray_i].wall_hit_h_y);
-    draw_line(g_rays[ray_i].wall_hit_x,g_rays[ray_i].wall_hit_y,g_player.x,g_player.y);
+    while (ray_i * PI/180 < FOV_ANGLE)
+    {
+        g_rays[ray_i].ray_angle = g_player.rotation_angle - (FOV_ANGLE/2) + (ray_i * PI / 180);
+                
+        normalize_angle(ray_i);
+        //printf("%f\n",g_rays[ray_i].ray_angle);
+        ray_facing(ray_i);
+        initialize_cast_data(ray_i);
+        horizontal_cast(ray_i);
+        vertical_cast(ray_i);
+        shortest_cast(ray_i);
+        //ft_putstr("h");
+    
+        // printf("1---- %f \n",g_rays[ray_i].wall_hit_x);
+        // printf("1---- %f \n",g_rays[ray_i].wall_hit_y);        
 
+        draw_line(g_rays[ray_i].wall_hit_x,g_rays[ray_i].wall_hit_y,g_player.x,g_player.y);
+        //ft_putnbr(ray_i);
+        ray_i++;
+    }
     //distance_two_points();
     //ft_putnbr(g_rays[ray_i].is_ray_facing_up);
     //ft_putnbr(g_rays[ray_i].is_ray_facing_left);
