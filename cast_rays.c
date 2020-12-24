@@ -53,7 +53,7 @@ void    initialize_cast_data(int ray_i)
 }
 void    horizontal_cast(int ray_i)
 {
-    while (g_rays[ray_i].next_h_x >= 0 && g_rays[ray_i].next_h_x <= (g_data.map_lenght * TILE_SIZE) && g_rays[ray_i].next_h_y >= 0 && g_rays[ray_i].next_h_y <= (g_data.map_height * TILE_SIZE) )
+    while (g_rays[ray_i].next_h_x >= 0 && g_rays[ray_i].next_h_x < (g_data.map_lenght * TILE_SIZE) && g_rays[ray_i].next_h_y >= 0 && g_rays[ray_i].next_h_y < (g_data.map_height * TILE_SIZE) )
     {
         if (is_wall_at(g_rays[ray_i].next_h_x,g_rays[ray_i].next_h_y))
         {
@@ -158,11 +158,12 @@ void    vertical_intercept(ray_i)
 void    cast_rays()
 {
     int ray_i;
-
-    ray_i = 0;
-    while (ray_i * PI/180 < FOV_ANGLE)
+    float angle_inc;
+    ray_i = 0;        
+    angle_inc = FOV_ANGLE / NUM_RAYS;
+    while (ray_i < NUM_RAYS)
     {
-        g_rays[ray_i].ray_angle = g_player.rotation_angle - (FOV_ANGLE/2) + (ray_i * PI / 180);    
+        g_rays[ray_i].ray_angle = (g_player.rotation_angle - (FOV_ANGLE / 2)) + (ray_i * angle_inc);  
         normalize_angle(ray_i);
         ray_facing(ray_i);
         initialize_cast_data(ray_i);
@@ -171,7 +172,8 @@ void    cast_rays()
         vertical_intercept(ray_i);
         vertical_cast(ray_i);
         shortest_cast(ray_i);
-        draw_line(g_rays[ray_i].wall_hit_x,g_rays[ray_i].wall_hit_y,g_player.x,g_player.y);
+        draw_line(g_rays[ray_i].wall_hit_x * MINIMAP_SCALE,g_rays[ray_i].wall_hit_y * MINIMAP_SCALE ,g_player.x * MINIMAP_SCALE ,g_player.y * MINIMAP_SCALE);
+    
         ray_i++;
     }
 }

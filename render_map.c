@@ -50,10 +50,7 @@ void    draw_rect(int i, int j,int color)
         x = 0;
         while (x != TILE_SIZE)
         {
-            if (y == 0 || x == TILE_SIZE - 1)
-                my_mlx_pixel_put(&g_mlx, (j * TILE_SIZE) + x,(i * TILE_SIZE) + y,RED);
-            else
-                my_mlx_pixel_put(&g_mlx, (j * TILE_SIZE) + x,(i * TILE_SIZE) + y,color);
+                my_mlx_pixel_put(&g_mlx, ((j * TILE_SIZE) + x) * MINIMAP_SCALE ,((i * TILE_SIZE) + y) * MINIMAP_SCALE,color);
             x++;
         }
         y++;

@@ -1,5 +1,5 @@
 CC		:= gcc
-CFLAGS	:= -Wall -Werror -Wextra 
+CFLAGS	:= -Wall -Werror -Wextra -fsanitize=address
 NAME	:= cub3D
 SRC		:= main.c  cast_rays.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c ft_error.c read_file.c render_map.c cub3d_utils.c mlx.c
 SRC_PATH := srcs

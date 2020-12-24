@@ -20,6 +20,8 @@
 # include <stdio.h>
 # include <mlx.h>
 
+# define MINIMAP_SCALE 1
+# define NUM_RAYS g_data.window_width
 # define RED 16711680
 # define WHITE 16777215
 # define BLACK 0
