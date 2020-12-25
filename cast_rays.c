@@ -115,7 +115,7 @@ void    shortest_cast(int ray_i)
         g_rays[ray_i].wall_hit_y = g_rays[ray_i].wall_hit_v_y;
     }
 }
-void horizontal_intercept(ray_i)
+void horizontal_intercept(int ray_i)
 {
        g_rays[ray_i].y_intercept = floor(g_player.y/ TILE_SIZE) * TILE_SIZE;
     if (g_rays[ray_i].is_ray_facing_down)
@@ -136,7 +136,7 @@ void horizontal_intercept(ray_i)
     if (g_rays[ray_i].is_ray_facing_up)
         g_rays[ray_i].next_h_y--;
 }
-void    vertical_intercept(ray_i)
+void    vertical_intercept(int ray_i)
 {
         g_rays[ray_i].x_intercept = floor(g_player.x/ TILE_SIZE) * TILE_SIZE;
     if (g_rays[ray_i].is_ray_facing_right)
@@ -174,6 +174,7 @@ void    cast_rays()
         shortest_cast(ray_i);
         draw_line(g_rays[ray_i].wall_hit_x * MINIMAP_SCALE,g_rays[ray_i].wall_hit_y * MINIMAP_SCALE ,g_player.x * MINIMAP_SCALE ,g_player.y * MINIMAP_SCALE);
     
-        ray_i++;
+        ray_i = ray_i + 1;;
     }
+    g_rays[100].ray_angle = (g_player.rotation_angle - (FOV_ANGLE / 2)) + (ray_i * angle_inc);
 }

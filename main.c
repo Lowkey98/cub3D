@@ -107,7 +107,7 @@ int main()
     draw_map();
     fetch_player_info();
     draw_player();
-    g_rays = malloc((NUM_RAYS + 10000) *  sizeof(g_rays));
+    g_rays = malloc((g_data.window_width  ) *  sizeof(t_rays));
     cast_rays();
     //draw_line(200,200,100,100);
     mlx_put_image_to_window(g_mlx.ptr,g_mlx.win,g_mlx.img,0,0);
