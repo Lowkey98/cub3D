@@ -49,13 +49,18 @@ void    initialize_cast_data(int ray_i)
     g_rays[ray_i].wall_hit_v_x = 0;
     g_rays[ray_i].wall_hit_v_y = 0;
     g_rays[ray_i].found_v_wall = 0;
+    g_rays[ray_i].is_ray_facing_left = 0;
+    g_rays[ray_i].is_ray_facing_up = 0;
+    g_rays[ray_i].is_ray_facing_right = 0;
+    g_rays[ray_i].is_ray_facing_down = 0;
+
 
 }
 void    horizontal_cast(int ray_i)
 {
     while (g_rays[ray_i].next_h_x >= 0 && g_rays[ray_i].next_h_x < (g_data.map_lenght * TILE_SIZE) && g_rays[ray_i].next_h_y >= 0 && g_rays[ray_i].next_h_y < (g_data.map_height * TILE_SIZE) )
     {
-        if (is_wall_at(g_rays[ray_i].next_h_x,g_rays[ray_i].next_h_y))
+        if (is_wall_at(g_rays[ray_i].next_h_x,g_rays[ray_i].next_h_y - g_rays[ray_i].is_ray_facing_up))
         {
             g_rays[ray_i].wall_hit_h_x = g_rays[ray_i].next_h_x;
             g_rays[ray_i].wall_hit_h_y = g_rays[ray_i].next_h_y;
@@ -73,7 +78,7 @@ void    vertical_cast(int ray_i)
 {
     while (g_rays[ray_i].next_v_x >= 0 && g_rays[ray_i].next_v_x <= (g_data.map_lenght * TILE_SIZE) && g_rays[ray_i].next_v_y  >= 0 && g_rays[ray_i].next_v_y <= (g_data.map_height * TILE_SIZE) )
     {
-        if (is_wall_at(g_rays[ray_i].next_v_x,g_rays[ray_i].next_v_y))
+        if (is_wall_at(g_rays[ray_i].next_v_x - g_rays[ray_i].is_ray_facing_left,g_rays[ray_i].next_v_y))
         {
             g_rays[ray_i].wall_hit_v_x = g_rays[ray_i].next_v_x;
             g_rays[ray_i].wall_hit_v_y = g_rays[ray_i].next_v_y;
@@ -135,8 +140,8 @@ void horizontal_intercept(int ray_i)
     g_rays[ray_i].next_h_x = g_rays[ray_i].x_intercept;
     g_rays[ray_i].next_h_y = g_rays[ray_i].y_intercept;
     
-    if (g_rays[ray_i].is_ray_facing_up)
-        g_rays[ray_i].next_h_y--;
+    // if (g_rays[ray_i].is_ray_facing_up)
+    //     g_rays[ray_i].next_h_y--;
 }
 void    vertical_intercept(int ray_i)
 {
@@ -154,8 +159,8 @@ void    vertical_intercept(int ray_i)
         g_rays[ray_i].y_step *= -1;
     g_rays[ray_i].next_v_x = g_rays[ray_i].x_intercept;
     g_rays[ray_i].next_v_y = g_rays[ray_i].y_intercept;
-    if (g_rays[ray_i].is_ray_facing_left)
-        g_rays[ray_i].next_v_x--;
+    // if (g_rays[ray_i].is_ray_facing_left)
+    //     g_rays[ray_i].next_v_x--;
 }
 void    cast_rays()
 {
@@ -167,8 +172,9 @@ void    cast_rays()
     {
         g_rays[ray_i].ray_angle = (g_player.rotation_angle - (FOV_ANGLE / 2)) + (ray_i * angle_inc);  
         normalize_angle(ray_i);
-        ray_facing(ray_i);
         initialize_cast_data(ray_i);
+        ray_facing(ray_i);
+
         horizontal_intercept(ray_i);
         horizontal_cast(ray_i);
         vertical_intercept(ray_i);

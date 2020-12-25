@@ -106,7 +106,7 @@ int	key_press(int key)
     draw_player();
     cast_rays();
                 //my_mlx_pixel_put(&g_mlx, 100,100, YELLOW);
-    render_walls();
+    //render_walls();
     mlx_put_image_to_window(g_mlx.ptr, g_mlx.win, g_mlx.img, 0, 0);
     g_player.turn_direction = 0;
     g_player.walk_direction = 0;
@@ -130,7 +130,7 @@ int main()
     draw_player();
     g_rays = malloc((g_data.window_width  ) *  sizeof(t_rays));
     cast_rays();
-    render_walls();
+    //render_walls();
     //draw_line(200,200,100,100);
     mlx_put_image_to_window(g_mlx.ptr,g_mlx.win,g_mlx.img,0,0);
     mlx_hook(g_mlx.win, 2, 1L << 0, key_press, (void *)0);
