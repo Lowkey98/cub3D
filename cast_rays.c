@@ -176,5 +176,4 @@ void    cast_rays()
     
         ray_i = ray_i + 1;;
     }
-    g_rays[100].ray_angle = (g_player.rotation_angle - (FOV_ANGLE / 2)) + (ray_i * angle_inc);
 }
