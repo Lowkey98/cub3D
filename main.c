@@ -128,7 +128,7 @@ int main()
     draw_map();
     fetch_player_info();
     draw_player();
-    g_rays = malloc((g_data.window_width  ) *  sizeof(t_rays));
+    g_rays = malloc((g_data.window_width) *  sizeof(t_rays));
     cast_rays();
     render_walls();
     //draw_line(200,200,100,100);
