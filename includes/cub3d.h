@@ -20,7 +20,7 @@
 # include <stdio.h>
 # include <mlx.h>
 
-# define MINIMAP_SCALE 1
+# define MINIMAP_SCALE 0.2
 # define NUM_RAYS g_data.window_width
 # define RED 16711680
 # define WHITE 16777215
@@ -103,8 +103,13 @@ typedef struct s_rays
     float y_step;
     float h_distance;
     float v_distance;
+    float distance;
+    float distance_projection_plane;
+    float wall_stripe_height;
+    float wall_stripe_width;
 } t_rays;
 t_rays *g_rays;
+void    render_walls();
 void    draw_line(float x_one,float y_one,float x_zero,float y_zero);
 void   draw_player();
 void    fetch_player_info();

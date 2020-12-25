@@ -67,6 +67,25 @@ void    rotate_player()
     g_player.rotation_angle += g_player.turn_direction * g_player.rotation_speed;
     //ft_putnbr(g_player.turn_direction);
 }
+void clear()
+{
+    int x;
+    int y;
+    
+    x = 0;
+    y = 0;
+    while (x < g_data.window_width)
+    {
+        while (y < g_data.window_height)
+        {
+            my_mlx_pixel_put(&g_mlx,x,y,BLACK);
+            y++;
+        }
+        y = 0;
+        x++;
+    }
+
+}
 int	key_press(int key)
 {
 	if (key == UP_ARROW)
@@ -80,12 +99,14 @@ int	key_press(int key)
     
 
     //ft_putnbr(5);
+    clear();
     draw_map();
     move_player();
     rotate_player();
     draw_player();
     cast_rays();
                 //my_mlx_pixel_put(&g_mlx, 100,100, YELLOW);
+    render_walls();
     mlx_put_image_to_window(g_mlx.ptr, g_mlx.win, g_mlx.img, 0, 0);
     g_player.turn_direction = 0;
     g_player.walk_direction = 0;
@@ -97,8 +118,8 @@ int main()
     initialize_data();
     read_file();
     g_mlx.ptr = mlx_init();
-    g_mlx.win = mlx_new_window(g_mlx.ptr, g_data.window_height  ,g_data.window_width,"cub3d");
-    g_mlx.img = mlx_new_image(g_mlx.ptr,g_data.window_height,g_data.window_width);
+    g_mlx.win = mlx_new_window(g_mlx.ptr, g_data.window_width  ,g_data.window_height,"cub3d");
+    g_mlx.img = mlx_new_image(g_mlx.ptr,g_data.window_width,g_data.window_height);
     g_mlx.addr = mlx_get_data_addr(g_mlx.img, &g_mlx.bits_per_pixel,&g_mlx.line_length,&g_mlx.endian);
     //ft_putnbr(g_mlx.line_length);
     g_player.turn_direction = 0;
@@ -109,6 +130,7 @@ int main()
     draw_player();
     g_rays = malloc((g_data.window_width  ) *  sizeof(t_rays));
     cast_rays();
+    render_walls();
     //draw_line(200,200,100,100);
     mlx_put_image_to_window(g_mlx.ptr,g_mlx.win,g_mlx.img,0,0);
     mlx_hook(g_mlx.win, 2, 1L << 0, key_press, (void *)0);

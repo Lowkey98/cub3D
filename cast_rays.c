@@ -108,11 +108,13 @@ void    shortest_cast(int ray_i)
     {
         g_rays[ray_i].wall_hit_x = g_rays[ray_i].wall_hit_h_x;
         g_rays[ray_i].wall_hit_y = g_rays[ray_i].wall_hit_h_y;
+        g_rays[ray_i].distance = g_rays[ray_i].h_distance;
     }
     else
     {
         g_rays[ray_i].wall_hit_x = g_rays[ray_i].wall_hit_v_x;
         g_rays[ray_i].wall_hit_y = g_rays[ray_i].wall_hit_v_y;
+        g_rays[ray_i].distance = g_rays[ray_i].v_distance;
     }
 }
 void horizontal_intercept(int ray_i)
