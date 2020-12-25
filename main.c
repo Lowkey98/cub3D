@@ -26,7 +26,7 @@ void    move_player()
 {
     float tmp_x;
     float tmp_y;
-    g_player.move_speed = 8;
+    g_player.move_speed = 20;
     g_player.move_step = g_player.move_speed * g_player.walk_direction;
 
     tmp_x = g_player.x + cos(g_player.rotation_angle) * g_player.move_step;
@@ -63,7 +63,7 @@ void    rotate_player()
 {
     // if (!g_player.turn_direction)
     //     return ;
-    g_player.rotation_speed = 2 * (PI /180);
+    g_player.rotation_speed = 5 * (PI /180);
     g_player.rotation_angle += g_player.turn_direction * g_player.rotation_speed;
     //ft_putnbr(g_player.turn_direction);
 }
@@ -106,7 +106,7 @@ int	key_press(int key)
     draw_player();
     cast_rays();
                 //my_mlx_pixel_put(&g_mlx, 100,100, YELLOW);
-    //render_walls();
+    render_walls();
     mlx_put_image_to_window(g_mlx.ptr, g_mlx.win, g_mlx.img, 0, 0);
     g_player.turn_direction = 0;
     g_player.walk_direction = 0;
@@ -130,7 +130,7 @@ int main()
     draw_player();
     g_rays = malloc((g_data.window_width  ) *  sizeof(t_rays));
     cast_rays();
-    //render_walls();
+    render_walls();
     //draw_line(200,200,100,100);
     mlx_put_image_to_window(g_mlx.ptr,g_mlx.win,g_mlx.img,0,0);
     mlx_hook(g_mlx.win, 2, 1L << 0, key_press, (void *)0);
