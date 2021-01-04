@@ -331,7 +331,7 @@ int read_file()
 
 	i = 1;
 	map_str = ft_calloc(1,1);
-	fd = open("map.cub",O_RDONLY);
+	fd = open(g_data.map_name,O_RDONLY);
 	while(i)
 	{
 		i = get_next_line(fd,&line);

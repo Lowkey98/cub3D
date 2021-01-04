@@ -2,8 +2,9 @@
 #include <stdio.h>
 #include "includes/cub3d.h"
 
-void initialize_data()
+void initialize_data(char *argv)
 {
+    g_data.map_name = argv;
     g_data.map = 0;
     g_data.x_render_size = 0;
     g_data.y_render_size = 0;
@@ -118,9 +119,11 @@ int	key_press(int key)
     //players_line();
     return (0);
 }
-int main()
-{  
-    initialize_data();
+int main(int argc,char **argv)
+{ 
+    if (argc != 2)
+        ft_error("wrong number of arguments"); 
+    initialize_data(argv[1]);
     read_file();
     g_mlx.ptr = mlx_init();
     g_mlx.win = mlx_new_window(g_mlx.ptr, g_data.window_width  ,g_data.window_height,"cub3d");

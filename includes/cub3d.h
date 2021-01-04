@@ -40,6 +40,7 @@
 typedef struct  s_struct
 {
     char **map;
+    char *map_name;
     int window_width;
     int window_height;
     int r_check;
