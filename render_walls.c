@@ -14,8 +14,7 @@ void draw_walls(int i, float *j)
     inc = 0;
     while (inc < g_rays[i].wall_stripe_height && *j < g_data.window_height)
     {
-        if (*j > 0)
-            my_mlx_pixel_put(&g_mlx, i, *j,GREEN);
+        my_mlx_pixel_put(&g_mlx, i, *j,GREEN);
         inc++;
         (*j)++;
     }
@@ -44,6 +43,8 @@ void    render_walls()
         correct_distance =  g_rays[i].distance * cos(g_rays[i].ray_angle - g_player.rotation_angle);
         g_rays[i].distance_projection_plane = (g_data.window_width / 2) / tan(FOV_ANGLE / 2);
         g_rays[i].wall_stripe_height = (TILE_SIZE / correct_distance * g_rays[i].distance_projection_plane);
+        if (g_rays[i].wall_stripe_height > g_data.window_height)
+            g_rays[i].wall_stripe_height = g_data.window_height;
         y = g_data.window_height/2 - (g_rays[i].wall_stripe_height /2);
           //printf("%f\n", y);
             draw_sky(y,i,&j);
