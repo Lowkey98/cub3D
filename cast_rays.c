@@ -93,7 +93,7 @@ void    vertical_cast(int ray_i)
     }
 }    
 
-float   distance_two_points(x_one,y_one,x_two,y_two)
+float   distance_two_points(float x_one,float y_one,float x_two,float y_two)
 {
     return (sqrt((x_one - x_two) * (x_one - x_two) + (y_one - y_two) * (y_one - y_two)));
 }
@@ -182,6 +182,6 @@ void    cast_rays()
         shortest_cast(ray_i);
         draw_line(g_rays[ray_i].wall_hit_x * MINIMAP_SCALE,g_rays[ray_i].wall_hit_y * MINIMAP_SCALE ,g_player.x * MINIMAP_SCALE ,g_player.y * MINIMAP_SCALE);
     
-        ray_i = ray_i + 1;;
+        ray_i++;
     }
 }

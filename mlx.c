@@ -26,7 +26,7 @@ void    draw_line(float x_one,float y_one,float x_zero,float y_zero)
     y_inc = dy / steps;
     while (i < steps)
     {        
-        my_mlx_pixel_put(&g_mlx,x_zero,y_zero,BLACK);
+        my_mlx_pixel_put(&g_mlx,x_zero,y_zero,PINK);
         x_zero += x_inc;
         y_zero  += y_inc;
         //printf("%f\n",y);

@@ -59,11 +59,11 @@ void    draw_rect(int i, int j,int color)
 int grid_color(int i,int j)
 {
     if (g_data.map[i][j] == '1')
-        return (RED);
-    if (g_data.map[i][j] == '0')
-        return (WHITE);
+        return (GREEN);
+    if (g_data.map[i][j] == '0' || g_data.map[i][j] == 'N')
+        return (BLUE);
     if (g_data.map[i][j] == ' ')
-        return (BLACK);
+        return (PURPLE);
     // return (0);
     return (WHITE);
 }
