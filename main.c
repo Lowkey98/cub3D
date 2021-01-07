@@ -89,6 +89,8 @@ void clear()
 }
 int	key_press(int key)
 {
+    if (key == 53 || key == 12)
+        exit(1);
 	if (key == UP_ARROW)
 	    g_player.walk_direction = 1;
 	else if (key == DOWN_ARROW)
@@ -97,7 +99,7 @@ int	key_press(int key)
 	    g_player.turn_direction = -1;
 	else if (key == RIGHT_ARROW)
 	    g_player.turn_direction = 1;
-    
+    printf("%d\n",key);
 
     //ft_putnbr(5);
     clear();
@@ -124,8 +126,9 @@ int main(int argc,char **argv)
     if (argc != 2)
         ft_error("wrong number of arguments"); 
     initialize_data(argv[1]);
-    read_file();
     g_mlx.ptr = mlx_init();
+    read_file();
+
     g_mlx.win = mlx_new_window(g_mlx.ptr, g_data.window_width  ,g_data.window_height,"cub3d");
     g_mlx.img = mlx_new_image(g_mlx.ptr,g_data.window_width,g_data.window_height);
     g_mlx.addr = mlx_get_data_addr(g_mlx.img, &g_mlx.bits_per_pixel,&g_mlx.line_length,&g_mlx.endian);

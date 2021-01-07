@@ -78,7 +78,76 @@ void	check_r(char **tab)
 		j++;
 	}
 }
-char *fetch_r(char *str)
+void fetch_ea(char *str)
+{
+	int i;
+	void *tmp;
+	i = 2;
+	while (str[i] == ' ' && str[i] != '\0')
+		i++;
+	tmp = mlx_xpm_file_to_image(g_mlx.ptr, str + i,&i,&i);
+	if (tmp == NULL)
+		ft_error("ERROR\n East texture file doesnt exist");
+	g_texture.east_texture = (int *)mlx_get_data_addr(tmp, &i,&i,&i);
+	if (g_texture.east_texture == NULL)
+		ft_error("ERROR \n East texture file  isnt readable");
+
+	g_data.ea_completed = 1;
+
+}
+void fetch_we(char *str)
+{
+	int i;
+	void *tmp;
+	i = 2;
+	while (str[i] == ' ' && str[i] != '\0')
+		i++;
+	tmp = mlx_xpm_file_to_image(g_mlx.ptr, str + i,&i,&i);
+	if (tmp == NULL)
+		ft_error("ERROR\n West texture file doesnt exist");
+	g_texture.west_texture = (int *)mlx_get_data_addr(tmp, &i,&i,&i);
+	if (g_texture.west_texture == NULL)
+		ft_error("ERROR \n West texture file  isnt readable");
+
+	g_data.we_completed = 1;
+
+}
+void fetch_so(char *str)
+{
+	int i;
+	void *tmp;
+	i = 2;
+	while (str[i] == ' ' && str[i] != '\0')
+		i++;
+	tmp = mlx_xpm_file_to_image(g_mlx.ptr, str + i,&i,&i);
+	if (tmp == NULL)
+		ft_error("ERROR\n South texture file doesnt exist");
+	g_texture.south_texture = (int *)mlx_get_data_addr(tmp, &i,&i,&i);
+	if (g_texture.south_texture == NULL)
+		ft_error("ERROR \n South texture file  isnt readable");
+
+	g_data.so_completed = 1;
+
+}
+
+void fetch_no(char *str)
+{
+	int i;
+	void *tmp;
+	i = 2;
+	while (str[i] == ' ' && str[i] != '\0')
+		i++;
+	tmp = mlx_xpm_file_to_image(g_mlx.ptr, str + i,&i,&i);
+	if (tmp == NULL)
+		ft_error("ERROR\n North texture file doesnt exist");
+	g_texture.north_texture = (int *)mlx_get_data_addr(tmp, &i,&i,&i);
+	if (g_texture.north_texture == NULL)
+		ft_error("ERROR \n North texture file  isnt readable");
+
+	g_data.no_completed = 1;
+
+}
+void fetch_r(char *str)
 {
 	char ** tmp;
 	
@@ -88,7 +157,6 @@ char *fetch_r(char *str)
 	g_data.window_height = ft_atoi(tmp[2]);
 	free(tmp);
 	g_data.r_completed = 1;
-	return (str);
 }
 
 // char *fetch_f(char *str)
@@ -111,7 +179,7 @@ char *fetch_r(char *str)
 
 int	reached_map()
 {
-	if (g_data.r_completed && g_data.f_completed)
+	if (g_data.r_completed && g_data.f_completed && g_data.no_completed && g_data.so_completed && g_data.ea_completed && g_data.we_completed)
 	{
 		//printf("%d",g_data->r_completed);
 		return (1);
@@ -136,7 +204,9 @@ void	fetch_element(char *str)
 			str++;
 		if (*str == 'R')
 			fetch_r(str);
-		else if(*str == 'F')
+		else if(*str == 'N')
+			fetch_no(str);
+		else if (*str == 'F')
 			g_data.f_completed = 1;
 		else
 			ft_error("element not known");

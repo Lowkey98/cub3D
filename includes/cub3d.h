@@ -47,11 +47,16 @@ typedef struct  s_struct
     int x_render_size;
     int y_render_size;
     int r_completed;
+    int no_completed;
+	int so_completed;
+	int we_completed;
+	int ea_completed;
     int f_completed;
     int map_lenght;
     int map_height;
 } t_struct;
 t_struct g_data;    
+
 
 typedef struct s_lib
 {
@@ -104,6 +109,8 @@ typedef struct s_rays
     float next_v_y;
     int found_h_wall;
     int found_v_wall;
+    int is_wall_v;
+    int is_wall_h;
     float x_step;
     float y_step;
     float h_distance;
@@ -114,6 +121,14 @@ typedef struct s_rays
     float wall_stripe_width;
 } t_rays;
 t_rays *g_rays;
+typedef struct s_texture
+{
+    int *north_texture;
+	int *south_texture;
+	int *east_texture;
+	int *west_texture;
+}t_texture;
+t_texture g_texture;
 void    render_walls();
 void    draw_line(float x_one,float y_one,float x_zero,float y_zero);
 void   draw_player();
