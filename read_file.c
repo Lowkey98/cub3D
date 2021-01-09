@@ -208,6 +208,12 @@ void	fetch_element(char *str)
 			fetch_no(str);
 		else if (*str == 'F')
 			g_data.f_completed = 1;
+		else if (*str == 'E')
+			fetch_ea(str);
+		else if (*str == 'W')
+			fetch_we(str);
+		else if (*str == 'S')
+			fetch_so(str);	
 		else
 			ft_error("element not known");
 }

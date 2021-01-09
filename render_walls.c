@@ -15,7 +15,6 @@ int wall_to_texture(int j, int i)
 }
 int *fetch_texture(int i)
 {
-	i = 0;
     if (g_rays[i].is_ray_facing_up && g_rays[i].is_wall_h)
         return (g_texture.north_texture);
 	if (g_rays[i].is_ray_facing_down && g_rays[i].is_wall_h)
@@ -24,7 +23,7 @@ int *fetch_texture(int i)
         return (g_texture.west_texture);
 	if (g_rays[i].is_ray_facing_right && g_rays[i].is_wall_v)
         return (g_texture.east_texture);
-    //return (NULL);
+    return (NULL);
 }
 void draw_walls(int i, float *j)
 {
@@ -32,7 +31,16 @@ void draw_walls(int i, float *j)
 	int texture_start;
     int *texture;        
 	
-	texture = fetch_texture(i);          
+	texture = fetch_texture(i);
+	if (i == 0)
+	{
+		printf("texture south %p \n",g_texture.south_texture);
+		printf("texture north %p \n",g_texture.north_texture);
+		printf("texture east %p \n",g_texture.east_texture);
+		printf("texture west %p \n",g_texture.west_texture);
+		printf("texture  %p \n",texture);
+
+	} 
     inc = 0;
 	if (g_rays[i].is_wall_v)
 	{
@@ -46,7 +54,10 @@ void draw_walls(int i, float *j)
     {
 		//if (fetch_texture(i))
 		//if (*j > 0)
-        	my_mlx_pixel_put(&g_mlx, i, *j,texture[(wall_to_texture(*j,i) * TILE_SIZE) + texture_start]);
+		my_mlx_pixel_put(&g_mlx, i, *j,texture[(wall_to_texture(*j,i) * TILE_SIZE) + texture_start]);
+
+
+
 		//else
         	//my_mlx_pixel_put(&g_mlx, i, *j,GREEN);
         inc++;

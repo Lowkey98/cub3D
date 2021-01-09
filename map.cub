@@ -2,6 +2,10 @@ R 1500  700
 
 F
 
+EA ./texture_east.xpm
+WE ./texture_west.xpm
+SO ./texture_south.xpm
+
 NO ./texture_north.xpm
 
         11111111          111111111111
