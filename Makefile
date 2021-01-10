@@ -9,7 +9,7 @@ LINK	:= -I /usr/share/man/man3 -L /usr/local/lib -lmlx -framework OpenGL -framew
 all: $(NAME)
 
 
-$(NAME): $(SRCS)
+$(NAME): $(SRC)
 		make -C $(LIBFT_PATH)
 		$(CC) $(CFLAGS) $(SRC) $(LINK)  $(LIBFT) -o $(NAME)
 

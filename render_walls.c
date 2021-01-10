@@ -30,7 +30,7 @@ void draw_walls(int i, float *j)
     float inc;
 	int texture_start;
     int *texture;        
-	
+	float a;
 	texture = fetch_texture(i);
 	if (i == 0)
 	{
@@ -54,6 +54,7 @@ void draw_walls(int i, float *j)
     {
 		//if (fetch_texture(i))
 		//if (*j > 0)
+		a = *j;
 		my_mlx_pixel_put(&g_mlx, i, *j,texture[(wall_to_texture(*j,i) * TILE_SIZE) + texture_start]);
 
 
