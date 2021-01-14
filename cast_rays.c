@@ -1,18 +1,5 @@
 # include "includes/cub3d.h"
 
-void	cast_ray(int ray_i)
-{
-	int i;
-
-	i = 0;
-	while (i != TILE_SIZE)
-	{
-	g_rays[ray_i].wall_hit_x = g_player.x + (cos(g_rays[ray_i].ray_angle) * i);
-		g_rays[ray_i].wall_hit_y = g_player.y + (sin(g_rays[ray_i].ray_angle) * i);
-		my_mlx_pixel_put(&g_mlx, g_rays[ray_i].wall_hit_x,g_rays[ray_i].wall_hit_y, YELLOW);
-	i++;
-	}
-}
 
 void	normalize_angle(int ray_i)
 {
@@ -61,7 +48,7 @@ void	initialize_cast_data(int ray_i)
 
 void	horizontal_cast(int ray_i)
 {
-	while (g_rays[ray_i].next_h_x >= 0 && g_rays[ray_i].next_h_x < (g_data.map_lenght * TILE_SIZE) && g_rays[ray_i].next_h_y >= 0 && g_rays[ray_i].next_h_y < (g_data.map_height * TILE_SIZE) )
+	while (g_rays[ray_i].next_h_x >= 0 && g_rays[ray_i].next_h_x < (g_data.map_lenght * g_TILE_SIZE) && g_rays[ray_i].next_h_y >= 0 && g_rays[ray_i].next_h_y < (g_data.map_height * g_TILE_SIZE) )
 	{
 		if (is_wall_at(g_rays[ray_i].next_h_x,g_rays[ray_i].next_h_y - g_rays[ray_i].is_ray_facing_up))
 		{
@@ -80,7 +67,7 @@ void	horizontal_cast(int ray_i)
 
 void	vertical_cast(int ray_i)
 {
-	while (g_rays[ray_i].next_v_x >= 0 && g_rays[ray_i].next_v_x <= (g_data.map_lenght * TILE_SIZE) && g_rays[ray_i].next_v_y >= 0 && g_rays[ray_i].next_v_y <= (g_data.map_height * TILE_SIZE) )
+	while (g_rays[ray_i].next_v_x >= 0 && g_rays[ray_i].next_v_x <= (g_data.map_lenght * g_TILE_SIZE) && g_rays[ray_i].next_v_y >= 0 && g_rays[ray_i].next_v_y <= (g_data.map_height * g_TILE_SIZE) )
 	{
 		if (is_wall_at(g_rays[ray_i].next_v_x - g_rays[ray_i].is_ray_facing_left,g_rays[ray_i].next_v_y))
 		{
@@ -135,15 +122,15 @@ void	shortest_cast(int ray_i)
 
 void horizontal_intercept(int ray_i)
 {
-	g_rays[ray_i].y_intercept = floor(g_player.y/ TILE_SIZE) * TILE_SIZE;
+	g_rays[ray_i].y_intercept = floor(g_player.y/ g_TILE_SIZE) * g_TILE_SIZE;
 	if (g_rays[ray_i].is_ray_facing_down)
-		g_rays[ray_i].y_intercept += TILE_SIZE;
+		g_rays[ray_i].y_intercept += g_TILE_SIZE;
 	g_rays[ray_i].x_intercept = g_player.x + (g_rays[ray_i].y_intercept - g_player.y) / tan(g_rays[ray_i].ray_angle);
-	g_rays[ray_i].y_step = TILE_SIZE;
+	g_rays[ray_i].y_step = g_TILE_SIZE;
 	if (g_rays[ray_i].is_ray_facing_up)
 		g_rays[ray_i].y_step *= -1;
 
-	g_rays[ray_i].x_step = TILE_SIZE / tan(g_rays[ray_i].ray_angle);
+	g_rays[ray_i].x_step = g_TILE_SIZE / tan(g_rays[ray_i].ray_angle);
 	if (g_rays[ray_i].is_ray_facing_left && g_rays[ray_i].x_step > 0)
 		g_rays[ray_i].x_step *= -1;
 	if (g_rays[ray_i].is_ray_facing_right && g_rays[ray_i].x_step < 0)
@@ -157,14 +144,14 @@ void horizontal_intercept(int ray_i)
 
 void	vertical_intercept(int ray_i)
 {
-		g_rays[ray_i].x_intercept = floor(g_player.x/ TILE_SIZE) * TILE_SIZE;
+		g_rays[ray_i].x_intercept = floor(g_player.x/ g_TILE_SIZE) * g_TILE_SIZE;
 	if (g_rays[ray_i].is_ray_facing_right)
-		g_rays[ray_i].x_intercept += TILE_SIZE;
+		g_rays[ray_i].x_intercept += g_TILE_SIZE;
 	g_rays[ray_i].y_intercept = g_player.y + (g_rays[ray_i].x_intercept - g_player.x) * tan(g_rays[ray_i].ray_angle);
-	g_rays[ray_i].x_step = TILE_SIZE;
+	g_rays[ray_i].x_step = g_TILE_SIZE;
 	if (g_rays[ray_i].is_ray_facing_left)
 		g_rays[ray_i].x_step *= -1;
-	g_rays[ray_i].y_step = TILE_SIZE * tan(g_rays[ray_i].ray_angle);
+	g_rays[ray_i].y_step = g_TILE_SIZE * tan(g_rays[ray_i].ray_angle);
 	if (g_rays[ray_i].is_ray_facing_up && g_rays[ray_i].y_step > 0)
 		g_rays[ray_i].y_step *= -1;
 	if (g_rays[ray_i].is_ray_facing_down && g_rays[ray_i].y_step < 0)
@@ -180,10 +167,10 @@ void	cast_rays()
 	int ray_i;
 	float angle_inc;
 	ray_i = 0;
-	angle_inc = FOV_ANGLE / NUM_RAYS;
-	while (ray_i < NUM_RAYS)
+	angle_inc = g_FOV_ANGLE / g_NUM_RAYS;
+	while (ray_i < g_NUM_RAYS)
 	{
-		g_rays[ray_i].ray_angle = (g_player.rotation_angle - (FOV_ANGLE / 2)) + (ray_i * angle_inc);
+		g_rays[ray_i].ray_angle = (g_player.rotation_angle - (g_FOV_ANGLE / 2)) + (ray_i * angle_inc);
 		normalize_angle(ray_i);
 		initialize_cast_data(ray_i);
 		ray_facing(ray_i);
@@ -193,7 +180,7 @@ void	cast_rays()
 		vertical_intercept(ray_i);
 		vertical_cast(ray_i);
 		shortest_cast(ray_i);
-		draw_line(g_rays[ray_i].wall_hit_x * MINIMAP_SCALE,g_rays[ray_i].wall_hit_y * MINIMAP_SCALE ,g_player.x * MINIMAP_SCALE ,g_player.y * MINIMAP_SCALE);
+		//draw_line(g_rays[ray_i].wall_hit_x * MINIMAP_SCALE,g_rays[ray_i].wall_hit_y * MINIMAP_SCALE ,g_player.x * MINIMAP_SCALE ,g_player.y * MINIMAP_SCALE);
 
 		ray_i++;
 	}

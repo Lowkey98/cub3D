@@ -11,7 +11,7 @@ int wall_to_texture(int j, int i)
 {
 	int y;
 	y = j + (g_rays[i].wall_stripe_height / 2) - (g_data.window_height /2);
-	return (y * ((float)TILE_SIZE / g_rays[i].wall_stripe_height));
+	return (y * (g_TILE_SIZE/ g_rays[i].wall_stripe_height));
 }
 int *fetch_texture(int i)
 {
@@ -29,41 +29,61 @@ void draw_walls(int i, float *j)
 {
     float inc;
 	int texture_start;
+	float a = *j;
     int *texture;        
-	float a;
+	//float a;
 	texture = fetch_texture(i);
-	if (i == 0)
-	{
-		printf("texture south %p \n",g_texture.south_texture);
-		printf("texture north %p \n",g_texture.north_texture);
-		printf("texture east %p \n",g_texture.east_texture);
-		printf("texture west %p \n",g_texture.west_texture);
-		printf("texture  %p \n",texture);
+	// if (i == 0)
+	// {
+	// 	printf("texture south %p \n",g_texture.south_texture);
+	// 	printf("texture north %p \n",g_texture.north_texture);
+	// 	printf("texture east %p \n",g_texture.east_texture);
+	// 	printf("texture west %p \n",g_texture.west_texture);
+	// 	//printf("texture  %p \n",texture);
 
-	} 
+	// } 
     inc = 0;
 	if (g_rays[i].is_wall_v)
 	{
-		texture_start = fmod(g_rays[i].wall_hit_y,TILE_SIZE);
+		texture_start = fmod(g_rays[i].wall_hit_y,g_TILE_SIZE);
 		//ft_putchar('a');
 	}
 	else
-		texture_start = fmod(g_rays[i].wall_hit_x,TILE_SIZE);
+		texture_start = fmod(g_rays[i].wall_hit_x,g_TILE_SIZE);
 	//printf("%d\n",texture_start);
-    while (inc < g_rays[i].wall_stripe_height && *j < g_data.window_height)
+    while (inc < g_rays[i].wall_stripe_height && a < g_data.window_height)
     {
 		//if (fetch_texture(i))
 		//if (*j > 0)
-		a = *j;
-		my_mlx_pixel_put(&g_mlx, i, *j,texture[(wall_to_texture(*j,i) * TILE_SIZE) + texture_start]);
+		//a = *j;
+		     //*j = g_data.window_height/2 - (g_rays[i].wall_stripe_height /2);
+
+		// if (g_rays[i].is_ray_facing_up && g_rays[i].is_wall_h)
+		//my_mlx_pixel_put(&g_mlx, i, a,texture[n);
+	// if (g_rays[i].is_ray_facing_down && g_rays[i].is_wall_h)
+	// if (inc == 0)
+	int n = (wall_to_texture(*j,i) * g_TILE_SIZE) + texture_start;
+	// printf("%d\n", n);
+	//if (g_texture.north_texture[n] <  0)
+		//printf("hello \n");
+
+	//my_mlx_pixel_put(&g_mlx, i, *j,  g_texture.north_texture[(wall_to_texture(*j,i) * g_TILE_SIZE) + texture_start]);
+	// if (g_rays[i].is_ray_facing_left && g_rays[i].is_wall_v)
+	if (n >= 4096)
+		n = 4095;
+	my_mlx_pixel_put(&g_mlx, i, *j, texture[n]);
+	//if (g_rays[i].is_ray_facing_right && g_rays[i].is_wall_v)
+		//my_mlx_pixel_put(&g_mlx, i, *j,g_texture.east_texture[(wall_to_texture(*j,i) * 64) + texture_start]);
 
 
 
 		//else
         	//my_mlx_pixel_put(&g_mlx, i, *j,GREEN);
         inc++;
-        (*j)++;
+        a++;
+		*j = a;
     }
+	//printf("%f \n",(*j));
 }
 
 void draw_floor(int i, float *j)
@@ -85,11 +105,11 @@ void    render_walls()
     y = 0;
     i = 0;
 
-    while (i < NUM_RAYS)
+    while (i < g_NUM_RAYS)
     {
         correct_distance =  g_rays[i].distance * cos(g_rays[i].ray_angle - g_player.rotation_angle);
-        g_rays[i].distance_projection_plane = (g_data.window_width / 2) / tan(FOV_ANGLE / 2);
-        g_rays[i].wall_stripe_height = (TILE_SIZE / correct_distance * g_rays[i].distance_projection_plane);
+        g_rays[i].distance_projection_plane = (g_data.window_width / 2) / tan(g_FOV_ANGLE / 2);
+        g_rays[i].wall_stripe_height = (g_TILE_SIZE / correct_distance * g_rays[i].distance_projection_plane);
         // if (g_rays[i].wall_stripe_height > g_data.window_height)
         //      g_rays[i].wall_stripe_height = g_data.window_height;
         y = g_data.window_height/2 - (g_rays[i].wall_stripe_height /2);

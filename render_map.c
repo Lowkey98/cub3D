@@ -6,7 +6,7 @@ void    fetch_rotation_angle()
     else if(g_player.direction == 'E')
         g_player.rotation_angle = PI;
     else if(g_player.direction == 'N')    
-        g_player.rotation_angle = 3 * PI/2;
+        g_player.rotation_angle = 3 * PI/2 + (14  * (PI /180)) ;
     else if(g_player.direction == 'W')
         g_player.rotation_angle = 2 * PI;     
 }
@@ -26,8 +26,8 @@ void    fetch_player_info()
             if (g_data.map[i][j] == 'N' || g_data.map[i][j] == 'S' || g_data.map[i][j] == 'E' ||g_data.map[i][j] == 'W')
             {
                 g_player.direction = g_data.map[i][j];
-                g_player.x = j * TILE_SIZE + TILE_SIZE/2;
-                g_player.y = i * TILE_SIZE + TILE_SIZE/2;
+                g_player.x = j * g_TILE_SIZE + g_TILE_SIZE/2;
+                g_player.y = i * g_TILE_SIZE + g_TILE_SIZE/2;
             }
             j++;
         }
@@ -45,12 +45,12 @@ void    draw_rect(int i, int j,int color)
 
     x = 0;
     y = 0;
-    while(y != TILE_SIZE)
+    while(y != g_TILE_SIZE)
     {
         x = 0;
-        while (x != TILE_SIZE)
+        while (x != g_TILE_SIZE)
         {
-                my_mlx_pixel_put(&g_mlx, ((j * TILE_SIZE) + x) * MINIMAP_SCALE ,((i * TILE_SIZE) + y) * MINIMAP_SCALE,color);
+                my_mlx_pixel_put(&g_mlx, ((j * g_TILE_SIZE) + x) * MINIMAP_SCALE ,((i * g_TILE_SIZE) + y) * MINIMAP_SCALE,color);
             x++;
         }
         y++;

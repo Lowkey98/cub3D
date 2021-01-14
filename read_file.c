@@ -102,7 +102,8 @@ void fetch_we(char *str)
 	i = 2;
 	while (str[i] == ' ' && str[i] != '\0')
 		i++;
-	tmp = mlx_xpm_file_to_image(g_mlx.ptr, str + i,&i,&i);
+	tmp = mlx_xpm_file_to_image(g_mlx.ptr, str + i,&g_texture.west_texture_w,&g_texture.west_texture_h);
+	//printf("%d\n",g_texture.west_texture_h);
 	if (tmp == NULL)
 		ft_error("ERROR\n West texture file doesnt exist");
 	g_texture.west_texture = (int *)mlx_get_data_addr(tmp, &i,&i,&i);
@@ -141,6 +142,10 @@ void fetch_no(char *str)
 	if (tmp == NULL)
 		ft_error("ERROR\n North texture file doesnt exist");
 	g_texture.north_texture = (int *)mlx_get_data_addr(tmp, &i,&i,&i);
+	// int j = 0;
+	// while (g_texture.north_texture[j])
+	// 	j++;
+	// printf("%d",j);
 	if (g_texture.north_texture == NULL)
 		ft_error("ERROR \n North texture file  isnt readable");
 

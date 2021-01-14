@@ -17,8 +17,8 @@ int is_wall_at(float x, float y)
     int i;
     int j;
 
-    i = y / TILE_SIZE;
-    j = x / TILE_SIZE;
+    i = y / g_TILE_SIZE;
+    j = x / g_TILE_SIZE;
     if (g_data.map[i][j] == '1')
         return (1);
     return (0);
@@ -50,11 +50,11 @@ void   draw_player()
     
     //my_mlx_pixel_put(&g_mlx, g_player.x,g_player.y,YELLOW);
     //players_line();
-    while (i != TILE_SIZE)
+    while (i != g_TILE_SIZE)
     {
         g_player.line_x = g_player.x + (cos(g_player.rotation_angle) * i);
         g_player.line_y = g_player.y + (sin(g_player.rotation_angle) * i);
-            my_mlx_pixel_put(&g_mlx, g_player.line_x * MINIMAP_SCALE ,g_player.line_y * MINIMAP_SCALE, GREEN);
+            //my_mlx_pixel_put(&g_mlx, g_player.line_x * MINIMAP_SCALE ,g_player.line_y * MINIMAP_SCALE, GREEN);
       i++;
     }
     //my_mlx_pixel_put(&g_mlx, g_player.line_x,g_player.line_y, YELLOW);
@@ -99,22 +99,17 @@ int	key_press(int key)
 	    g_player.turn_direction = -1;
 	else if (key == RIGHT_ARROW)
 	    g_player.turn_direction = 1;
-    printf("%d\n",key);
+    //printf("%d\n",key);
 
     //ft_putnbr(5);
     clear();
-    draw_map();
+    //draw_map();
     move_player();
     rotate_player();
-    draw_player();
+    //draw_player();
     cast_rays();
                 //my_mlx_pixel_put(&g_mlx, 100,100, YELLOW);
     render_walls();
-    draw_map();
-    move_player();
-    rotate_player();
-    draw_player();
-    cast_rays();
     mlx_put_image_to_window(g_mlx.ptr, g_mlx.win, g_mlx.img, 0, 0);
     g_player.turn_direction = 0;
     g_player.walk_direction = 0;
@@ -123,12 +118,14 @@ int	key_press(int key)
 }
 int main(int argc,char **argv)
 { 
+	g_TILE_SIZE = 64;
+	g_FOV_ANGLE = 60 * PI / 180;
     if (argc != 2)
         ft_error("wrong number of arguments"); 
     initialize_data(argv[1]);
     g_mlx.ptr = mlx_init();
     read_file();
-
+	g_NUM_RAYS = g_data.window_width;
     g_mlx.win = mlx_new_window(g_mlx.ptr, g_data.window_width  ,g_data.window_height,"cub3d");
     g_mlx.img = mlx_new_image(g_mlx.ptr,g_data.window_width,g_data.window_height);
     g_mlx.addr = mlx_get_data_addr(g_mlx.img, &g_mlx.bits_per_pixel,&g_mlx.line_length,&g_mlx.endian);
@@ -136,10 +133,10 @@ int main(int argc,char **argv)
     g_player.turn_direction = 0;
     g_player.walk_direction = 0;
   
-    draw_map();
+    //draw_map();
     fetch_player_info();
     draw_player();
-    g_rays = malloc((NUM_RAYS) *  sizeof(t_rays));
+    g_rays = malloc((g_NUM_RAYS) *  sizeof(t_rays));
     cast_rays();
     render_walls();
     //draw_line(200,200,100,100);

@@ -21,7 +21,7 @@
 # include <mlx.h>
 
 # define MINIMAP_SCALE 0.2
-# define NUM_RAYS g_data.window_width
+int g_NUM_RAYS;
 # define RED 16711680
 # define WHITE 16777215
 # define BLACK 0
@@ -30,13 +30,13 @@
 # define PURPLE 8681416
 # define GREEN 8692050
 # define BLUE 11834
-# define TILE_SIZE 64
+int g_TILE_SIZE;
 # define PI 3.14159265
 # define UP_ARROW 126
 # define DOWN_ARROW 125
 # define RIGHT_ARROW 124
 # define LEFT_ARROW 123
-# define FOV_ANGLE 60 * PI / 180
+float g_FOV_ANGLE;
 typedef struct  s_struct
 {
     char **map;
@@ -127,6 +127,14 @@ typedef struct s_texture
 	int *south_texture;
 	int *east_texture;
 	int *west_texture;
+    int north_texture_w;
+	int south_texture_w;
+	int east_texture_w;
+	int west_texture_w;
+	int north_texture_h;
+	int south_texture_h;
+	int east_texture_h;
+	int west_texture_h;	
 }t_texture;
 t_texture g_texture;
 void    render_walls();

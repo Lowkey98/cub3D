@@ -1,5 +1,14 @@
 {
     "files.associations": {
-        "locale": "c"
-    }
+		"locale": "c",
+		"__hash_table": "c",
+		"__split_buffer": "c",
+		"atomic": "c",
+		"ios": "c",
+		"istream": "c",
+		"string": "c",
+		"system_error": "c",
+		"unordered_map": "c",
+		"vector": "c"
+	}
 }

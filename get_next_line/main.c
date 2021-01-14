@@ -14,5 +14,5 @@ int main()
 		printf("%s",line);
 		j++;
 	}
-	printf("%s",line);
+	//printf("%s",line);
 }
