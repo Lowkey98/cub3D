@@ -26,8 +26,8 @@ void    fetch_player_info()
             if (g_data.map[i][j] == 'N' || g_data.map[i][j] == 'S' || g_data.map[i][j] == 'E' ||g_data.map[i][j] == 'W')
             {
                 g_player.direction = g_data.map[i][j];
-                g_player.x = j * g_TILE_SIZE + g_TILE_SIZE/2;
-                g_player.y = i * g_TILE_SIZE + g_TILE_SIZE/2;
+                g_player.x = j * g_tile_size + g_tile_size/2;
+                g_player.y = i * g_tile_size + g_tile_size/2;
             }
             j++;
         }
@@ -45,12 +45,12 @@ void    draw_rect(int i, int j,int color)
 
     x = 0;
     y = 0;
-    while(y != g_TILE_SIZE)
+    while(y != g_tile_size)
     {
         x = 0;
-        while (x != g_TILE_SIZE)
+        while (x != g_tile_size)
         {
-                my_mlx_pixel_put(&g_mlx, ((j * g_TILE_SIZE) + x) * MINIMAP_SCALE ,((i * g_TILE_SIZE) + y) * MINIMAP_SCALE,color);
+                my_mlx_pixel_put(&g_mlx, ((j * g_tile_size) + x) * MINIMAP_SCALE ,((i * g_tile_size) + y) * MINIMAP_SCALE,color);
             x++;
         }
         y++;

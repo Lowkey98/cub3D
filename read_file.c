@@ -4,7 +4,7 @@
 # include "includes/get_next_line.h"
 
 char *fetch_file(char *str)
-{   
+{
     int  fd;
     char *buff;
 	str = malloc(1);
@@ -41,7 +41,7 @@ char *skip_empty_lines(char *str)
 char *cut_string(char *str, char x)
 {
 	int i;
-	
+
 	i = 0;
 	while (str[i])
 	{
@@ -52,7 +52,7 @@ char *cut_string(char *str, char x)
 		}
 		i++;
 	}
-	return (str); 
+	return (str);
 
 }
 void	check_r(char **tab)
@@ -140,14 +140,12 @@ void fetch_no(char *str)
 		i++;
 	tmp = mlx_xpm_file_to_image(g_mlx.ptr, str + i,&i,&i);
 	if (tmp == NULL)
-		ft_error("ERROR\n North texture file doesnt exist");
+		ft_error("ERROR\n Invalid North texture file");
 	g_texture.north_texture = (int *)mlx_get_data_addr(tmp, &i,&i,&i);
 	// int j = 0;
 	// while (g_texture.north_texture[j])
 	// 	j++;
-	// printf("%d",j);
-	if (g_texture.north_texture == NULL)
-		ft_error("ERROR \n North texture file  isnt readable");
+	// printf("%d",j)
 
 	g_data.no_completed = 1;
 
@@ -155,7 +153,7 @@ void fetch_no(char *str)
 void fetch_r(char *str)
 {
 	char ** tmp;
-	
+
 	tmp = ft_split(str,' ');
 	check_r(tmp);
 	g_data.window_width = ft_atoi(tmp[1]);
@@ -200,25 +198,41 @@ int	reached_map()
 // 		str = fetch_element(str, g_data);
 // 		///printf("a");
 // 	}
-	
+
 // }
+void fetch_f(char *str)
+{
+	int i;
+	char **tmp;
+
+	i = 0;
+	tmp = ft_split(str + 1, ',');
+
+	while (tmp[i])
+		i++;
+	if (i != 3)
+		ft_error("wrong number of informations in element f");
+	
+	g_data.f_completed = 1;
+
+}
+
 void	fetch_element(char *str)
 {
 	 //forcomp
-		while (*str == ' ')
-			str++;
+
 		if (*str == 'R')
 			fetch_r(str);
 		else if(*str == 'N')
 			fetch_no(str);
 		else if (*str == 'F')
-			g_data.f_completed = 1;
+			fetch_f(str);
 		else if (*str == 'E')
 			fetch_ea(str);
 		else if (*str == 'W')
 			fetch_we(str);
 		else if (*str == 'S')
-			fetch_so(str);	
+			fetch_so(str);
 		else
 			ft_error("element not known");
 }
@@ -245,7 +259,7 @@ int max_lenght()
 			j++;
 			if (j > max)
 				max = j;
-			
+
 		}
 		i++;
 	}
@@ -260,19 +274,19 @@ void	add_spaces()
 
 	i = 0;
 	j = 0;
-	
+
 	while (g_data.map[i])
 	{
 		tmplen = g_data.map_lenght - ft_strlen(g_data.map[i]);
 		tmp = calloc(tmplen + 1,1);
 		tmp = ft_memset(tmp,' ',tmplen);
 		g_data.map[i] = ft_strjoin(g_data.map[i],tmp);
-		
+
 		i++;
-		
+
 
 	}
-	 
+
 	// tmp = ft_calloc(g_data->map_lenght + 1, 1);
 		// tmp = ft_strcpy(tmp,g_data->map[i]);
 		//ft_putstr(tmp);
@@ -301,7 +315,7 @@ void	check_player()
 		g_player.exists = 1;
 	else
 		ft_error("there should be only one player");
-	
+
 }
 void	check_mapstr_error(char *map_str)
 {
@@ -316,10 +330,13 @@ void	check_mapstr_error(char *map_str)
 			ft_error("ERROR \nempty line in the map");
 		if (map_str[i] == 'N' || map_str[i] == 'S' || map_str[i] == 'E' || map_str[i] == 'W')
 			check_player();
-		else if (map_str[i] != '1' && map_str[i] != '0' && map_str[i] != ' ' && map_str[i] != '\n')
+		else if (map_str[i] != '1' && map_str[i] != '0' && map_str[i] != ' ' && map_str[i] != '\n' && map_str[i] != '2')
 			ft_error("ERROR \nbad character in the map");
 		i++;
 	}
+	if (g_player.exists == 0)
+		ft_error("there is no player");
+
 }
 void	check_map_frame()
 {
@@ -331,14 +348,14 @@ void	check_map_frame()
 	while(g_data.map[i])
 	{
 		//ft_putnbr(g_data->map_lenght - 1);
-		if (g_data.map[i][0] == '0' || g_data.map[i][g_data.map_lenght - 1] == '0')
-			ft_error("ERROR\n 0 at the edge of the map");
+		if (g_data.map[i][0] == '0' || g_data.map[i][g_data.map_lenght - 1] == '0' || g_data.map[i][0] == '2' || g_data.map[i][g_data.map_lenght - 1] == '2' )
+			ft_error("ERROR\n error at the edge of the map");
 		i++;
 	}
 	while(g_data.map[0][j])
 	{
-		if (g_data.map[0][j] == '0' || g_data.map[i - 1][j] == '0')
-			ft_error("ERROR\n 0 at the edge of the map");
+		if (g_data.map[0][j] == '0' || g_data.map[i - 1][j] == '0' || g_data.map[0][j] == '2' || g_data.map[i - 1][j] == '2')
+			ft_error("ERROR\n error at the edge of the map");
 		j++;
 	}
 
@@ -356,9 +373,9 @@ void	check_map_error()
 		j = 0;
 		while (g_data.map[i + 1][j + 1])
 		{
-			if (g_data.map[i + 1][j + 1] == '0' || g_data.map[i + 1][j + 1] == 'N' || g_data.map[i + 1][j + 1] == 'S' || g_data.map[i + 1][j + 1] == 'W' || g_data.map[i + 1][j + 1] == 'E')
+			if (g_data.map[i + 1][j + 1] == '0' || g_data.map[i + 1][j + 1] == 'N' || g_data.map[i + 1][j + 1] == 'S' || g_data.map[i + 1][j + 1] == 'W' || g_data.map[i + 1][j + 1] == 'E' || g_data.map[i + 1][j + 1] == '2')
 				if (g_data.map[i + 1][j] == ' ' || g_data.map[i][j + 1] == ' ' || g_data.map[i + 1][j + 2] == ' ' || g_data.map[i + 2][j + 1] == ' ')
-					ft_error("ERROR\n0 next to space");
+					ft_error("ERROR\n invalid character next to space");
 			j++;
 		}
 		i++;
@@ -427,4 +444,4 @@ int read_file()
 	fetch_map(map_str);
 	g_data.map_height = map_height();
     return (0);
-}   
+}

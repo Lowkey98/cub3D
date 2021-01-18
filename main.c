@@ -17,8 +17,8 @@ int is_wall_at(float x, float y)
     int i;
     int j;
 
-    i = y / g_TILE_SIZE;
-    j = x / g_TILE_SIZE;
+    i = y / g_tile_size;
+    j = x / g_tile_size;
     if (g_data.map[i][j] == '1')
         return (1);
     return (0);
@@ -50,7 +50,7 @@ void   draw_player()
     
     //my_mlx_pixel_put(&g_mlx, g_player.x,g_player.y,YELLOW);
     //players_line();
-    while (i != g_TILE_SIZE)
+    while (i != g_tile_size)
     {
         g_player.line_x = g_player.x + (cos(g_player.rotation_angle) * i);
         g_player.line_y = g_player.y + (sin(g_player.rotation_angle) * i);
@@ -118,7 +118,7 @@ int	key_press(int key)
 }
 int main(int argc,char **argv)
 { 
-	g_TILE_SIZE = 64;
+	g_tile_size = 64;
 	g_FOV_ANGLE = 60 * PI / 180;
     if (argc != 2)
         ft_error("wrong number of arguments"); 

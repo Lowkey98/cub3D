@@ -48,7 +48,7 @@ void	initialize_cast_data(int ray_i)
 
 void	horizontal_cast(int ray_i)
 {
-	while (g_rays[ray_i].next_h_x >= 0 && g_rays[ray_i].next_h_x < (g_data.map_lenght * g_TILE_SIZE) && g_rays[ray_i].next_h_y >= 0 && g_rays[ray_i].next_h_y < (g_data.map_height * g_TILE_SIZE) )
+	while (g_rays[ray_i].next_h_x >= 0 && g_rays[ray_i].next_h_x < (g_data.map_lenght * g_tile_size) && g_rays[ray_i].next_h_y >= 0 && g_rays[ray_i].next_h_y < (g_data.map_height * g_tile_size) )
 	{
 		if (is_wall_at(g_rays[ray_i].next_h_x,g_rays[ray_i].next_h_y - g_rays[ray_i].is_ray_facing_up))
 		{
@@ -67,7 +67,7 @@ void	horizontal_cast(int ray_i)
 
 void	vertical_cast(int ray_i)
 {
-	while (g_rays[ray_i].next_v_x >= 0 && g_rays[ray_i].next_v_x <= (g_data.map_lenght * g_TILE_SIZE) && g_rays[ray_i].next_v_y >= 0 && g_rays[ray_i].next_v_y <= (g_data.map_height * g_TILE_SIZE) )
+	while (g_rays[ray_i].next_v_x >= 0 && g_rays[ray_i].next_v_x <= (g_data.map_lenght * g_tile_size) && g_rays[ray_i].next_v_y >= 0 && g_rays[ray_i].next_v_y <= (g_data.map_height * g_tile_size) )
 	{
 		if (is_wall_at(g_rays[ray_i].next_v_x - g_rays[ray_i].is_ray_facing_left,g_rays[ray_i].next_v_y))
 		{
@@ -122,15 +122,15 @@ void	shortest_cast(int ray_i)
 
 void horizontal_intercept(int ray_i)
 {
-	g_rays[ray_i].y_intercept = floor(g_player.y/ g_TILE_SIZE) * g_TILE_SIZE;
+	g_rays[ray_i].y_intercept = floor(g_player.y/ g_tile_size) * g_tile_size;
 	if (g_rays[ray_i].is_ray_facing_down)
-		g_rays[ray_i].y_intercept += g_TILE_SIZE;
+		g_rays[ray_i].y_intercept += g_tile_size;
 	g_rays[ray_i].x_intercept = g_player.x + (g_rays[ray_i].y_intercept - g_player.y) / tan(g_rays[ray_i].ray_angle);
-	g_rays[ray_i].y_step = g_TILE_SIZE;
+	g_rays[ray_i].y_step = g_tile_size;
 	if (g_rays[ray_i].is_ray_facing_up)
 		g_rays[ray_i].y_step *= -1;
 
-	g_rays[ray_i].x_step = g_TILE_SIZE / tan(g_rays[ray_i].ray_angle);
+	g_rays[ray_i].x_step = g_tile_size / tan(g_rays[ray_i].ray_angle);
 	if (g_rays[ray_i].is_ray_facing_left && g_rays[ray_i].x_step > 0)
 		g_rays[ray_i].x_step *= -1;
 	if (g_rays[ray_i].is_ray_facing_right && g_rays[ray_i].x_step < 0)
@@ -144,14 +144,14 @@ void horizontal_intercept(int ray_i)
 
 void	vertical_intercept(int ray_i)
 {
-		g_rays[ray_i].x_intercept = floor(g_player.x/ g_TILE_SIZE) * g_TILE_SIZE;
+		g_rays[ray_i].x_intercept = floor(g_player.x/ g_tile_size) * g_tile_size;
 	if (g_rays[ray_i].is_ray_facing_right)
-		g_rays[ray_i].x_intercept += g_TILE_SIZE;
+		g_rays[ray_i].x_intercept += g_tile_size;
 	g_rays[ray_i].y_intercept = g_player.y + (g_rays[ray_i].x_intercept - g_player.x) * tan(g_rays[ray_i].ray_angle);
-	g_rays[ray_i].x_step = g_TILE_SIZE;
+	g_rays[ray_i].x_step = g_tile_size;
 	if (g_rays[ray_i].is_ray_facing_left)
 		g_rays[ray_i].x_step *= -1;
-	g_rays[ray_i].y_step = g_TILE_SIZE * tan(g_rays[ray_i].ray_angle);
+	g_rays[ray_i].y_step = g_tile_size * tan(g_rays[ray_i].ray_angle);
 	if (g_rays[ray_i].is_ray_facing_up && g_rays[ray_i].y_step > 0)
 		g_rays[ray_i].y_step *= -1;
 	if (g_rays[ray_i].is_ray_facing_down && g_rays[ray_i].y_step < 0)

@@ -30,7 +30,7 @@ int g_NUM_RAYS;
 # define PURPLE 8681416
 # define GREEN 8692050
 # define BLUE 11834
-int g_TILE_SIZE;
+int g_tile_size;
 # define PI 3.14159265
 # define UP_ARROW 126
 # define DOWN_ARROW 125
@@ -54,8 +54,14 @@ typedef struct  s_struct
     int f_completed;
     int map_lenght;
     int map_height;
+	int r_floor;
+	int g_floor;
+	int b_floor;
+	int r_ceiling;
+	int g_ceiling;
+	int b_ceiling;
 } t_struct;
-t_struct g_data;    
+t_struct g_data;
 
 
 typedef struct s_lib
@@ -85,7 +91,7 @@ typedef struct s_player
     float line_x;
     float line_y;
     float move_step;
-    
+
 } t_player;
 t_player g_player;
 typedef struct s_rays
@@ -134,7 +140,7 @@ typedef struct s_texture
 	int north_texture_h;
 	int south_texture_h;
 	int east_texture_h;
-	int west_texture_h;	
+	int west_texture_h;
 }t_texture;
 t_texture g_texture;
 void    render_walls();
