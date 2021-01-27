@@ -9,6 +9,23 @@
 		"string": "c",
 		"system_error": "c",
 		"unordered_map": "c",
-		"vector": "c"
+		"vector": "c",
+		"__config": "cpp",
+		"__debug": "cpp",
+		"algorithm": "cpp",
+		"array": "cpp",
+		"bitset": "cpp",
+		"chrono": "cpp",
+		"cmath": "cpp",
+		"complex": "cpp",
+		"functional": "cpp",
+		"iterator": "cpp",
+		"memory": "cpp",
+		"mutex": "cpp",
+		"ostream": "cpp",
+		"sstream": "cpp",
+		"string_view": "cpp",
+		"tuple": "cpp",
+		"utility": "cpp"
 	}
 }

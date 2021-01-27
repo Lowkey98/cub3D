@@ -20,7 +20,7 @@
 # include <stdio.h>
 # include <mlx.h>
 
-# define MINIMAP_SCALE 0.2
+# define MINIMAP_SCALE 0.5
 int g_NUM_RAYS;
 # define RED 16711680
 # define WHITE 16777215
@@ -62,7 +62,7 @@ typedef struct  s_struct
 	int b_ceiling;
 } t_struct;
 t_struct g_data;
-
+float g_a;
 
 typedef struct s_lib
 {

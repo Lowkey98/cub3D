@@ -200,6 +200,14 @@ int	reached_map()
 // 	}
 
 // }
+// void fetch_f_r(char **tmp)
+// {
+// 	int i;
+
+// 	i = 0;
+
+
+// }
 void fetch_f(char *str)
 {
 	int i;
@@ -211,16 +219,14 @@ void fetch_f(char *str)
 	while (tmp[i])
 		i++;
 	if (i != 3)
-		ft_error("wrong number of informations in element f");
-	
-	g_data.f_completed = 1;
+		ft_error("invalid element f");
 
+	g_data.f_completed = 1;
 }
 
 void	fetch_element(char *str)
 {
 	 //forcomp
-
 		if (*str == 'R')
 			fetch_r(str);
 		else if(*str == 'N')
@@ -385,6 +391,10 @@ void	check_map_error()
 void	fetch_map(char *map_str)
 {
 	// int i = 0;
+	if (!g_data.r_completed)
+		ft_error("empty file");
+	if (*map_str == '\0')
+		ft_error("there is no map");
 		check_mapstr_error(map_str);
 		g_data.map = ft_split(map_str,'\n');
 		g_data.map_lenght = max_lenght();

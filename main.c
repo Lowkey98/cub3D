@@ -30,14 +30,15 @@ void    move_player()
     g_player.move_speed = 10;
     g_player.move_step = g_player.move_speed * g_player.walk_direction;
 
-    tmp_x = g_player.x + cos(g_player.rotation_angle) * g_player.move_step;
-    tmp_y = g_player.y + sin(g_player.rotation_angle) * g_player.move_step;
+    tmp_x = g_player.x + cos(g_player.rotation_angle + g_a) * g_player.move_step;
+    tmp_y = g_player.y + sin(g_player.rotation_angle  + g_a) * g_player.move_step;
+	g_a = 0;
     if (is_wall_at(tmp_x,tmp_y))
         return ;
     g_player.x = tmp_x;
     g_player.y = tmp_y;
     //my_mlx_pixel_put(&g_mlx, g_player.x,g_player.y,YELLOW);
-    
+
 
     //ft_putstr("a");
 }
@@ -47,14 +48,14 @@ void   draw_player()
     int i;
 
     i = 0;
-    
+
     //my_mlx_pixel_put(&g_mlx, g_player.x,g_player.y,YELLOW);
     //players_line();
     while (i != g_tile_size)
     {
         g_player.line_x = g_player.x + (cos(g_player.rotation_angle) * i);
         g_player.line_y = g_player.y + (sin(g_player.rotation_angle) * i);
-            //my_mlx_pixel_put(&g_mlx, g_player.line_x * MINIMAP_SCALE ,g_player.line_y * MINIMAP_SCALE, GREEN);
+            my_mlx_pixel_put(&g_mlx, g_player.line_x * MINIMAP_SCALE ,g_player.line_y * MINIMAP_SCALE, GREEN);
       i++;
     }
     //my_mlx_pixel_put(&g_mlx, g_player.line_x,g_player.line_y, YELLOW);
@@ -64,7 +65,7 @@ void    rotate_player()
 {
     // if (!g_player.turn_direction)
     //     return ;
-    g_player.rotation_speed = 1 * (PI /180);
+    g_player.rotation_speed = 5 * (PI /180);
     g_player.rotation_angle += g_player.turn_direction * g_player.rotation_speed;
     //ft_putnbr(g_player.turn_direction);
 }
@@ -72,7 +73,7 @@ void clear()
 {
     int x;
     int y;
-    
+
     x = 0;
     y = 0;
     while (x < g_data.window_width)
@@ -99,17 +100,25 @@ int	key_press(int key)
 	    g_player.turn_direction = -1;
 	else if (key == RIGHT_ARROW)
 	    g_player.turn_direction = 1;
-    //printf("%d\n",key);
-
+	else if (key == 2)
+	{
+		g_a = PI/2;
+		g_player.walk_direction = 1;
+	}
+	else if (key == 0)
+	{
+		g_a = PI/2;
+		g_player.walk_direction = -1;
+	}
     //ft_putnbr(5);
     clear();
-    //draw_map();
+    draw_map();
     move_player();
     rotate_player();
-    //draw_player();
+    draw_player();
     cast_rays();
                 //my_mlx_pixel_put(&g_mlx, 100,100, YELLOW);
-    render_walls();
+    //render_walls();
     mlx_put_image_to_window(g_mlx.ptr, g_mlx.win, g_mlx.img, 0, 0);
     g_player.turn_direction = 0;
     g_player.walk_direction = 0;
@@ -117,11 +126,11 @@ int	key_press(int key)
     return (0);
 }
 int main(int argc,char **argv)
-{ 
+{
 	g_tile_size = 64;
 	g_FOV_ANGLE = 60 * PI / 180;
     if (argc != 2)
-        ft_error("wrong number of arguments"); 
+        ft_error("wrong number of arguments");
     initialize_data(argv[1]);
     g_mlx.ptr = mlx_init();
     read_file();
@@ -132,13 +141,13 @@ int main(int argc,char **argv)
     //ft_putnbr(g_mlx.line_length);
     g_player.turn_direction = 0;
     g_player.walk_direction = 0;
-  
-    //draw_map();
+
+    draw_map();
     fetch_player_info();
     draw_player();
     g_rays = malloc((g_NUM_RAYS) *  sizeof(t_rays));
     cast_rays();
-    render_walls();
+    //render_walls();
     //draw_line(200,200,100,100);
     mlx_put_image_to_window(g_mlx.ptr,g_mlx.win,g_mlx.img,0,0);
     mlx_hook(g_mlx.win, 2, 1L << 0, key_press, (void *)0);

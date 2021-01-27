@@ -5,10 +5,10 @@ void    fetch_rotation_angle()
         g_player.rotation_angle = PI/2;
     else if(g_player.direction == 'E')
         g_player.rotation_angle = PI;
-    else if(g_player.direction == 'N')    
+    else if(g_player.direction == 'N')
         g_player.rotation_angle = 3 * PI/2 + (14  * (PI /180)) ;
     else if(g_player.direction == 'W')
-        g_player.rotation_angle = 2 * PI;     
+        g_player.rotation_angle = 2 * PI;
 }
 void    fetch_player_info()
 {
@@ -80,8 +80,8 @@ void    draw_map()
         while (g_data.map[i][j])
         {
             draw_rect(i,j,grid_color(i,j));
-            //my_mlx_pixel_put(&g_mlx,1,1,0xffffff);
-            j++;        
+            my_mlx_pixel_put(&g_mlx,1,1,0xffffff);
+            j++;
             //ft_putnbr(j);
 
         }
