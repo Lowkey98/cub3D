@@ -20,7 +20,7 @@
 # include <stdio.h>
 # include <mlx.h>
 
-# define MINIMAP_SCALE 0.5
+# define MINIMAP_SCALE 0.2
 int g_NUM_RAYS;
 # define RED 16711680
 # define WHITE 16777215

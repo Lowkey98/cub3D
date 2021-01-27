@@ -30,7 +30,7 @@ void draw_walls(int i, float *j)
     float inc;
 	int texture_start;
 	float a = *j;
-    int *texture;        
+    int *texture;
 	//float a;
 	texture = fetch_texture(i);
 	// if (i == 0)
@@ -41,7 +41,7 @@ void draw_walls(int i, float *j)
 	// 	printf("texture west %p \n",g_texture.west_texture);
 	// 	//printf("texture  %p \n",texture);
 
-	// } 
+	// }
     inc = 0;
 	if (g_rays[i].is_wall_v)
 	{
@@ -117,7 +117,7 @@ void    render_walls()
             draw_sky(y,i,&j);
             draw_walls(i, &j);
             draw_floor(i, &j);
-        
+
 
         // while (j < g_rays[i].wall_stripe_height && y < g_data.window_height)
         // {
