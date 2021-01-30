@@ -108,12 +108,13 @@ void    render_walls()
     while (i < g_NUM_RAYS)
     {
         correct_distance =  g_rays[i].distance * cos(g_rays[i].ray_angle - g_player.rotation_angle);
-        g_rays[i].distance_projection_plane = (g_data.window_width / 2) / tan(g_FOV_ANGLE / 2);
+        g_rays[i].distance_projection_plane = (g_data.window_width / 2) / tan(g_fov_angle / 2);
         g_rays[i].wall_stripe_height = (g_tile_size / correct_distance * g_rays[i].distance_projection_plane);
         // if (g_rays[i].wall_stripe_height > g_data.window_height)
         //      g_rays[i].wall_stripe_height = g_data.window_height;
         y = g_data.window_height/2 - (g_rays[i].wall_stripe_height /2);
           //printf("%f\n", y);
+		          //my_mlx_pixel_put(&g_mlx,1,1,PINK);
             draw_sky(y,i,&j);
             draw_walls(i, &j);
             draw_floor(i, &j);

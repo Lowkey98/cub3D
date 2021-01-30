@@ -167,10 +167,10 @@ void	cast_rays()
 	int ray_i;
 	float angle_inc;
 	ray_i = 0;
-	angle_inc = g_FOV_ANGLE / g_NUM_RAYS;
+	angle_inc = g_fov_angle / g_NUM_RAYS;
 	while (ray_i < g_NUM_RAYS)
 	{
-		g_rays[ray_i].ray_angle = (g_player.rotation_angle - (g_FOV_ANGLE / 2)) + (ray_i * angle_inc);
+		g_rays[ray_i].ray_angle = (g_player.rotation_angle - (g_fov_angle / 2)) + (ray_i * angle_inc);
 		normalize_angle(ray_i);
 		initialize_cast_data(ray_i);
 		ray_facing(ray_i);

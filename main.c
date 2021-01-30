@@ -1,6 +1,8 @@
 
 #include <stdio.h>
 #include "includes/cub3d.h"
+#include <string.h>
+
 
 void initialize_data(char *argv)
 {
@@ -11,6 +13,8 @@ void initialize_data(char *argv)
     g_data.r_completed = 0;
     g_data.f_completed = 0;
     g_data.map_lenght = 0;
+	g_tile_size = 64;
+	g_fov_angle = 60 * PI / 180;
 }
 int is_wall_at(float x, float y)
 {
@@ -27,7 +31,7 @@ void    move_player()
 {
     float tmp_x;
     float tmp_y;
-    g_player.move_speed = 5;
+    g_player.move_speed = 10;
     g_player.move_step = g_player.move_speed * g_player.walk_direction;
 
     tmp_x = g_player.x + cos(g_player.rotation_angle + g_a) * g_player.move_step;
@@ -100,23 +104,19 @@ int	key_press(int key)
 	    g_player.turn_direction = -1;
 	else if (key == RIGHT_ARROW)
 	    g_player.turn_direction = 1;
-	else if (key == 2)
+	else if (key == 2 || key  == 0)
 	{
 		g_a = PI/2;
-		g_player.walk_direction = 1;
+		g_player.walk_direction = -1 + key;
 	}
-	else if (key == 0)
-	{
-		g_a = PI/2;
-		g_player.walk_direction = -1;
-	}
+
     //ft_putnbr(5);
     clear();
     draw_map();
     move_player();
     rotate_player();
     //draw_player();
-    //cast_rays();
+    cast_rays();
                 //my_mlx_pixel_put(&g_mlx, 100,100, YELLOW);
     render_walls();
     mlx_put_image_to_window(g_mlx.ptr, g_mlx.win, g_mlx.img, 0, 0);
@@ -125,12 +125,26 @@ int	key_press(int key)
     //players_line();
     return (0);
 }
+void check_arg(int argc,char **argv)
+{
+	if (argc != 2 && argc != 3)
+        ft_error("format should be ./cub3d ");
+	char *dot = strrchr((const char*)argv[1], (int)'.');
+		if (dot && strcmp((const char*)dot, ".cub"))
+			ft_error("false");
+	if (argc == 3)
+	{
+		if (strcmp(argv[2], "--save"))
+			ft_error("third argument can only be --save");
+		else
+			g_save_flag = 1;
+	}
+
+
+}
 int main(int argc,char **argv)
 {
-	g_tile_size = 64;
-	g_FOV_ANGLE = 60 * PI / 180;
-    if (argc != 2)
-        ft_error("wrong number of arguments");
+	check_arg(argc,argv);
     initialize_data(argv[1]);
     g_mlx.ptr = mlx_init();
     read_file();
@@ -138,17 +152,18 @@ int main(int argc,char **argv)
     g_mlx.win = mlx_new_window(g_mlx.ptr, g_data.window_width  ,g_data.window_height,"cub3d");
     g_mlx.img = mlx_new_image(g_mlx.ptr,g_data.window_width,g_data.window_height);
     g_mlx.addr = mlx_get_data_addr(g_mlx.img, &g_mlx.bits_per_pixel,&g_mlx.line_length,&g_mlx.endian);
-    //ft_putnbr(g_mlx.line_length);
     g_player.turn_direction = 0;
     g_player.walk_direction = 0;
-
     draw_map();
     fetch_player_info();
-    //draw_player();
     g_rays = malloc((g_NUM_RAYS) *  sizeof(t_rays));
-    //cast_rays();
+    cast_rays();
     render_walls();
-    //draw_line(200,200,100,100);
+	if (g_save_flag == 1)
+	{
+
+		exit(0);
+	}
     mlx_put_image_to_window(g_mlx.ptr,g_mlx.win,g_mlx.img,0,0);
     mlx_hook(g_mlx.win, 2, 1L << 0, key_press, (void *)0);
     mlx_loop(g_mlx.ptr);

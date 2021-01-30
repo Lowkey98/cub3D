@@ -3,17 +3,7 @@
 # include "includes/libft.h"
 # include "includes/get_next_line.h"
 
-char *fetch_file(char *str)
-{
-    int  fd;
-    char *buff;
-	str = malloc(1);
-    buff = malloc(100000);
-    fd = open("map.cub",O_RDONLY);
-    while(read(fd,buff,10000))
-        str = ft_strjn(str,buff);
-    return (str);
-}
+
 int		reach_map(t_struct *g_data)
 {
 	g_data = 0;
@@ -208,18 +198,24 @@ int	reached_map()
 
 
 // }
+int  check_num(char *str)
+{
+	int i;
+
+	i = 0;
+}
 void fetch_f(char *str)
 {
 	int i;
-	char **tmp;
+	int r;
+	int b;
 
 	i = 0;
-	tmp = ft_split(str + 1, ',');
-
-	while (tmp[i])
+	while(str[i] == ' ')
 		i++;
-	if (i != 3)
-		ft_error("invalid element f");
+	r = atoi(str + i);
+	while (str[i] == ' ')
+		i++;
 
 	g_data.f_completed = 1;
 }
@@ -439,7 +435,8 @@ int read_file()
 
 	i = 1;
 	map_str = ft_calloc(1,1);
-	fd = open(g_data.map_name,O_RDONLY);
+	if ((fd = open(g_data.map_name,O_RDONLY)) == -1)
+		ft_error("file cant be opened");
 	while(i)
 	{
 		i = get_next_line(fd,&line);

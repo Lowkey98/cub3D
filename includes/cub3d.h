@@ -36,7 +36,15 @@ int g_tile_size;
 # define DOWN_ARROW 125
 # define RIGHT_ARROW 124
 # define LEFT_ARROW 123
-float g_FOV_ANGLE;
+float g_fov_angle;
+int g_save_flag;
+
+typedef struct s_list
+{
+void *content;
+struct s_list *next;
+} t_list;
+
 typedef struct  s_struct
 {
     char **map;
@@ -94,6 +102,22 @@ typedef struct s_player
 
 } t_player;
 t_player g_player;
+typedef	struct		s_bmp
+{
+	int				bitcount;
+	int				width;
+	int				bf_off_bits;
+	int				w_in_b;
+	int				image_size;
+	int				bi_size;
+	int				*data;
+	int				bi_planes;
+	int				row;
+	int				col;
+	int				height;
+	int				file_size;
+	unsigned	char*	buf;
+}					t_bmp;
 typedef struct s_rays
 {
     float ray_angle;
@@ -143,16 +167,18 @@ typedef struct s_texture
 	int west_texture_h;
 }t_texture;
 t_texture g_texture;
+void	ft_lstadd_back(t_list **lst, t_list *new);
 void    render_walls();
 void    draw_line(float x_one,float y_one,float x_zero,float y_zero);
 void   draw_player();
 void    fetch_player_info();
 char	*ft_strjn(char *s1, char *s2);
-int empty_line(char *str);
+int		empty_line(char *str);
 void    ft_error(char *message);
 int is_wall_at(float x, float y);
 int read_file();
 void    cast_rays();
 void    draw_map();
 void    my_mlx_pixel_put(t_lib *g_mlx, int x, int y, int color);
+void	ft_screenshot();
 #endif
