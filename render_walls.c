@@ -105,7 +105,7 @@ void    render_walls()
     y = 0;
     i = 0;
 
-    while (i < g_NUM_RAYS)
+    while (i < g_num_rays)
     {
         correct_distance =  g_rays[i].distance * cos(g_rays[i].ray_angle - g_player.rotation_angle);
         g_rays[i].distance_projection_plane = (g_data.window_width / 2) / tan(g_fov_angle / 2);

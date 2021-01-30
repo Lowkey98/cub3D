@@ -21,7 +21,7 @@
 # include <mlx.h>
 
 # define MINIMAP_SCALE 0.2
-int g_NUM_RAYS;
+int g_num_rays;
 # define RED 16711680
 # define WHITE 16777215
 # define BLACK 0
@@ -43,6 +43,7 @@ typedef struct		s_sprite
 {
 	int			x;
 	int			y;
+	float		distance;
 }					t_sprite;
 typedef struct s_list
 {
@@ -172,6 +173,8 @@ typedef struct s_texture
 	int west_texture_h;
 }t_texture;
 t_texture g_texture;
+float	distance_two_points(float x_one,float y_one,float x_two,float y_two);
+void	render_sprite();
 void fetch_sprite_position(int i,int j);
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_back(t_list **lst, t_list *new);

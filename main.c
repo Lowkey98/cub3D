@@ -16,6 +16,8 @@ void initialize_data(char *argv)
 	g_tile_size = 64;
 	g_fov_angle = 60 * PI / 180;
 	g_sprite_h = NULL;
+	g_player.turn_direction = 0;
+    g_player.walk_direction = 0;
 }
 int is_wall_at(float x, float y)
 {
@@ -149,17 +151,16 @@ int main(int argc,char **argv)
     initialize_data(argv[1]);
     g_mlx.ptr = mlx_init();
     read_file();
-	g_NUM_RAYS = g_data.window_width;
+	g_num_rays = g_data.window_width;
     g_mlx.win = mlx_new_window(g_mlx.ptr, g_data.window_width  ,g_data.window_height,"cub3d");
     g_mlx.img = mlx_new_image(g_mlx.ptr,g_data.window_width,g_data.window_height);
     g_mlx.addr = mlx_get_data_addr(g_mlx.img, &g_mlx.bits_per_pixel,&g_mlx.line_length,&g_mlx.endian);
-    g_player.turn_direction = 0;
-    g_player.walk_direction = 0;
     draw_map();
     fetch_player_info();
-    g_rays = malloc((g_NUM_RAYS) *  sizeof(t_rays));
+    g_rays = malloc((g_num_rays) *  sizeof(t_rays));
     cast_rays();
     render_walls();
+	render_sprite();
 	if (g_save_flag == 1)
 	{
 
