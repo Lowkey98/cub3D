@@ -93,7 +93,6 @@ void fetch_we(char *str)
 	while (str[i] == ' ' && str[i] != '\0')
 		i++;
 	tmp = mlx_xpm_file_to_image(g_mlx.ptr, str + i,&g_texture.west_texture_w,&g_texture.west_texture_h);
-	//printf("%d\n",g_texture.west_texture_h);
 	if (tmp == NULL)
 		ft_error("ERROR\n West texture file doesnt exist");
 	g_texture.west_texture = (int *)mlx_get_data_addr(tmp, &i,&i,&i);
@@ -132,10 +131,7 @@ void fetch_no(char *str)
 	if (tmp == NULL)
 		ft_error("ERROR\n Invalid North texture file");
 	g_texture.north_texture = (int *)mlx_get_data_addr(tmp, &i,&i,&i);
-	// int j = 0;
-	// while (g_texture.north_texture[j])
-	// 	j++;
-	// printf("%d",j)
+
 
 	g_data.no_completed = 1;
 
@@ -201,15 +197,16 @@ int	reached_map()
 int  check_num(char *str)
 {
 	int i;
-
+	str = 0;
 	i = 0;
+	return (0);
 }
 void fetch_f(char *str)
 {
 	int i;
 	int r;
-	int b;
-
+	int b ;
+	b = 0;
 	i = 0;
 	while(str[i] == ' ')
 		i++;
@@ -362,6 +359,18 @@ void	check_map_frame()
 	}
 
 }
+void 	printlinked()
+{
+	t_list *a;
+	a = g_sprite_h;
+	while (a)
+	{
+		printf("x == > %d \n",((t_sprite* )a ->content)->x);
+		printf("y == > %d \n",((t_sprite* )a ->content)->y);
+
+		a = a -> next;
+	}
+}
 void	check_map_error()
 {
 	int i;
@@ -378,10 +387,13 @@ void	check_map_error()
 			if (g_data.map[i + 1][j + 1] == '0' || g_data.map[i + 1][j + 1] == 'N' || g_data.map[i + 1][j + 1] == 'S' || g_data.map[i + 1][j + 1] == 'W' || g_data.map[i + 1][j + 1] == 'E' || g_data.map[i + 1][j + 1] == '2')
 				if (g_data.map[i + 1][j] == ' ' || g_data.map[i][j + 1] == ' ' || g_data.map[i + 1][j + 2] == ' ' || g_data.map[i + 2][j + 1] == ' ')
 					ft_error("ERROR\n invalid character next to space");
+			if (g_data.map[i][j] == '2')
+				fetch_sprite_position(i,j);
 			j++;
 		}
 		i++;
 	}
+	//printlinked();
 
 }
 void	fetch_map(char *map_str)

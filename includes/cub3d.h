@@ -39,12 +39,17 @@ int g_tile_size;
 float g_fov_angle;
 int g_save_flag;
 
+typedef struct		s_sprite
+{
+	int			x;
+	int			y;
+}					t_sprite;
 typedef struct s_list
 {
-void *content;
-struct s_list *next;
+	void *content;
+	struct s_list *next;
 } t_list;
-
+t_list *g_sprite_h;
 typedef struct  s_struct
 {
     char **map;
@@ -167,6 +172,8 @@ typedef struct s_texture
 	int west_texture_h;
 }t_texture;
 t_texture g_texture;
+void fetch_sprite_position(int i,int j);
+t_list	*ft_lstnew(void *content);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void    render_walls();
 void    draw_line(float x_one,float y_one,float x_zero,float y_zero);

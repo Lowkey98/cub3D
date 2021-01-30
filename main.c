@@ -15,6 +15,7 @@ void initialize_data(char *argv)
     g_data.map_lenght = 0;
 	g_tile_size = 64;
 	g_fov_angle = 60 * PI / 180;
+	g_sprite_h = NULL;
 }
 int is_wall_at(float x, float y)
 {
