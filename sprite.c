@@ -63,7 +63,7 @@ void sort_sprites()
 		new = new->next;
 }
 }
-void	render_sprite()
+void	sprite()
 {
 	sprite_distance();
 	sort_sprites();

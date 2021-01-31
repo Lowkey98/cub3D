@@ -201,21 +201,7 @@ int  check_num(char *str)
 	i = 0;
 	return (0);
 }
-void fetch_f(char *str)
-{
-	int i;
-	int r;
-	int b ;
-	b = 0;
-	i = 0;
-	while(str[i] == ' ')
-		i++;
-	r = atoi(str + i);
-	while (str[i] == ' ')
-		i++;
 
-	g_data.f_completed = 1;
-}
 
 void	fetch_element(char *str)
 {
@@ -224,8 +210,8 @@ void	fetch_element(char *str)
 			fetch_r(str);
 		else if(*str == 'N')
 			fetch_no(str);
-		else if (*str == 'F')
-			fetch_f(str);
+		else if (*str == 'F' && *(str + 1) == ' ')
+			fetch_f(str + 2);
 		else if (*str == 'E')
 			fetch_ea(str);
 		else if (*str == 'W')

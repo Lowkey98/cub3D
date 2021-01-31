@@ -71,12 +71,8 @@ typedef struct  s_struct
     int f_completed;
     int map_lenght;
     int map_height;
-	int r_floor;
-	int g_floor;
-	int b_floor;
-	int r_ceiling;
-	int g_ceiling;
-	int b_ceiling;
+	int f_rgb;
+	int c_rgb;
 } t_struct;
 t_struct g_data;
 float g_a;
@@ -177,9 +173,11 @@ typedef struct s_texture
 }t_texture;
 t_texture g_texture;
 
-void render_sprites();
+void fetch_f(char *str);
+void	sprite();
+void	render_sprites();
 float	distance_two_points(float x_one,float y_one,float x_two,float y_two);
-void	render_sprite();
+void	render_sprite(t_sprite *sprite);
 void fetch_sprite_position(int i,int j);
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_back(t_list **lst, t_list *new);

@@ -160,7 +160,7 @@ int main(int argc,char **argv)
     g_rays = malloc((g_num_rays) *  sizeof(t_rays));
     cast_rays();
     render_walls();
-	render_sprite();
+	render_sprites();
 	if (g_save_flag == 1)
 	{
 

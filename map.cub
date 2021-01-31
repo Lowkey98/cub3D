@@ -2,11 +2,7 @@ WE  ./texture_west.xpm
 NA  ./texture_north.xpm
 EA  ./texture_east.xpm
 
-F 0,0,0
-F 0 ,0,0
-F 0,0,0
-
-
+F 0,0,12
 R 1500 1500
 SO  ./texture_south.xpm
 
