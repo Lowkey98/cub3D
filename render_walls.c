@@ -90,7 +90,7 @@ void draw_floor(int i, float *j)
 {
     while (*j < g_data.window_height)
     {
-        my_mlx_pixel_put(&g_mlx, i, *j,BLUE);
+        my_mlx_pixel_put(&g_mlx, i, *j,g_data.f_color);
         (*j)++;
     }
 }

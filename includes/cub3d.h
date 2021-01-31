@@ -68,11 +68,13 @@ typedef struct  s_struct
 	int so_completed;
 	int we_completed;
 	int ea_completed;
+	int s_completed;
     int f_completed;
+	int c_completed;
     int map_lenght;
     int map_height;
-	int f_rgb;
-	int c_rgb;
+	int f_color;
+	int c_color;
 } t_struct;
 t_struct g_data;
 float g_a;
@@ -162,6 +164,7 @@ typedef struct s_texture
 	int *south_texture;
 	int *east_texture;
 	int *west_texture;
+	int *sprite_texture;
     int north_texture_w;
 	int south_texture_w;
 	int east_texture_w;
@@ -170,9 +173,13 @@ typedef struct s_texture
 	int south_texture_h;
 	int east_texture_h;
 	int west_texture_h;
+
 }t_texture;
 t_texture g_texture;
 
+void fetch_c(char *str);
+int		rgb_to_int(int t, int r, int g, int b);
+int*	initialize_rgb(int *rgb);
 void fetch_f(char *str);
 void	sprite();
 void	render_sprites();

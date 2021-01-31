@@ -1,11 +1,11 @@
 WE  ./texture_west.xpm
-NA  ./texture_north.xpm
-EA  ./texture_east.xpm
-
-F 0,0,12
-R 1500 1500
+NO  ./texture_north.xpm
+EA ./texture_east.xpm
+F 255   ,   0        ,0
+R 1500      15004
 SO  ./texture_south.xpm
-
+S ./sprite.xpm
+C 244,244,244
          111111111        111111111111
        11200001          1000000000001
       102N2011          1000111100011

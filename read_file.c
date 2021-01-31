@@ -68,6 +68,21 @@ void	check_r(char **tab)
 		j++;
 	}
 }
+void fetch_s(char *str)
+{
+	int i;
+	void *tmp;
+	i = 1;
+	while (str[i] == ' ' && str[i] != '\0')
+		i++;
+	tmp = mlx_xpm_file_to_image(g_mlx.ptr, str + i,&i,&i);
+	if (tmp == NULL)
+		ft_error("ERROR\n South texture file doesnt exist");
+	g_texture.sprite_texture= (int *)mlx_get_data_addr(tmp, &i,&i,&i);
+
+	g_data.s_completed = 1;
+
+}
 void fetch_ea(char *str)
 {
 	int i;
@@ -138,13 +153,39 @@ void fetch_no(char *str)
 }
 void fetch_r(char *str)
 {
-	char ** tmp;
+	int i;
+	int j;
 
-	tmp = ft_split(str,' ');
-	check_r(tmp);
-	g_data.window_width = ft_atoi(tmp[1]);
-	g_data.window_height = ft_atoi(tmp[2]);
-	free(tmp);
+	j = 0;
+	i = 1;
+
+	while (str[i] == ' ')
+		i++;
+
+	g_data.window_width = ft_atoi(str + i);
+	while (ft_isdigit(str[i]))
+	{
+		j++;
+		i++;
+	}
+	if (str[i] != ' ')
+		ft_error("no space");
+	while (str[i] == ' ')
+		i++;
+	g_data.window_height = ft_atoi(str + i);
+	if (g_data.window_height > 2500 || j > 4)
+		printf("kbir sghrnah");
+	j = 0;
+	while (ft_isdigit(str[i]))
+	{
+		j++;
+		i++;
+	}
+	if (str[i] != '\0')
+		ft_error("error in resolution");
+
+	if (g_data.window_width > 2500 || j > 4)
+		printf("kbir sghrnah");
 	g_data.r_completed = 1;
 }
 
@@ -168,13 +209,12 @@ void fetch_r(char *str)
 
 int	reached_map()
 {
-	if (g_data.r_completed && g_data.f_completed && g_data.no_completed && g_data.so_completed && g_data.ea_completed && g_data.we_completed)
+	if (g_data.s_completed && g_data.r_completed && g_data.c_completed && g_data.f_completed && g_data.no_completed && g_data.so_completed && g_data.ea_completed && g_data.we_completed)
 	{
 		//printf("%d",g_data->r_completed);
 		return (1);
 	}
 			//printf("%d",g_data->r_completed);
-
 	return (0);
 }
 // void    fetch_data(char *str, t_struct *g_data)
@@ -210,14 +250,18 @@ void	fetch_element(char *str)
 			fetch_r(str);
 		else if(*str == 'N')
 			fetch_no(str);
+		else if (*str == 'C' && *(str + 1) == ' ')
+			fetch_c(str + 2);
 		else if (*str == 'F' && *(str + 1) == ' ')
 			fetch_f(str + 2);
 		else if (*str == 'E')
 			fetch_ea(str);
 		else if (*str == 'W')
 			fetch_we(str);
-		else if (*str == 'S')
+		else if (*str == 'S' && *(str + 1) == 'O')
 			fetch_so(str);
+		else if (*str == 'S' && *(str + 1) == ' ')
+			fetch_s(str);
 		else
 			ft_error("element not known");
 }
