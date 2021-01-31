@@ -39,8 +39,34 @@ void print_distance()
 		g_sprite_h = g_sprite_h -> next;
 	}
 }
+void sort_sprites()
+{
+
+	t_list	*new;
+	t_list	*temp;
+	t_sprite	*inter;
+
+	new = g_sprite_h;
+	while (new != NULL)
+	{
+		temp = new;
+		while (temp->next != NULL)
+		{
+			if (((t_sprite *)temp->content)->distance < ((t_sprite *)temp->next->content)->distance)
+			{
+				inter = (t_sprite *)temp->content;
+				temp->content = temp->next->content;
+				temp->next->content = (void *)inter;
+			}
+			temp = temp->next;
+		}
+		new = new->next;
+}
+}
 void	render_sprite()
 {
 	sprite_distance();
+	sort_sprites();
 	print_distance();
+	render_sprites();
 }

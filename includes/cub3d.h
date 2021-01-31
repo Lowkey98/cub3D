@@ -44,6 +44,9 @@ typedef struct		s_sprite
 	int			x;
 	int			y;
 	float		distance;
+	int			size;
+	float		x_offset;
+	float 		y_offset;
 }					t_sprite;
 typedef struct s_list
 {
@@ -173,6 +176,8 @@ typedef struct s_texture
 	int west_texture_h;
 }t_texture;
 t_texture g_texture;
+
+void render_sprites();
 float	distance_two_points(float x_one,float y_one,float x_two,float y_two);
 void	render_sprite();
 void fetch_sprite_position(int i,int j);
