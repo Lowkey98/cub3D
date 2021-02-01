@@ -6,7 +6,7 @@ void    fetch_rotation_angle()
     else if(g_player.direction == 'W')
         g_player.rotation_angle = PI;
     else if(g_player.direction == 'N')
-        g_player.rotation_angle = 3 * PI/2 + (14  * (PI /180)) ;
+        g_player.rotation_angle = 3 * PI/2 ;
     else if(g_player.direction == 'E')
         g_player.rotation_angle = 2 * PI;
 }

@@ -122,6 +122,8 @@ int	key_press(int key)
     cast_rays();
                 //my_mlx_pixel_put(&g_mlx, 100,100, YELLOW);
     render_walls();
+		sprite();
+
     mlx_put_image_to_window(g_mlx.ptr, g_mlx.win, g_mlx.img, 0, 0);
     g_player.turn_direction = 0;
     g_player.walk_direction = 0;
@@ -160,7 +162,7 @@ int main(int argc,char **argv)
     g_rays = malloc((g_num_rays) *  sizeof(t_rays));
     cast_rays();
     render_walls();
-	render_sprites();
+	//sprite();
 	if (g_save_flag == 1)
 	{
 

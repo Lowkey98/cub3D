@@ -75,7 +75,7 @@ void fetch_s(char *str)
 	i = 1;
 	while (str[i] == ' ' && str[i] != '\0')
 		i++;
-	tmp = mlx_xpm_file_to_image(g_mlx.ptr, str + i,&i,&i);
+	tmp = mlx_xpm_file_to_image(g_mlx.ptr, str + i,&g_sprite_width,&g_sprite_height);
 	if (tmp == NULL)
 		ft_error("ERROR\n South texture file doesnt exist");
 	g_texture.sprite_texture= (int *)mlx_get_data_addr(tmp, &i,&i,&i);
@@ -186,7 +186,7 @@ void fetch_r(char *str)
 		ft_error("error in resolution");
 	if (g_data.window_height > 2500 || j > 4)
 		g_data.window_height = 1500;
-	printf("%d \n %d \n",g_data.window_width,g_data.window_height);
+	//printf("%d \n %d \n",g_data.window_width,g_data.window_height);
 		g_data.r_completed = 1;
 }
 

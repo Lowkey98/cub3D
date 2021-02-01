@@ -100,9 +100,7 @@ void	shortest_cast(int ray_i)
 	if (g_rays[ray_i].found_v_wall)
 		g_rays[ray_i].v_distance = distance_two_points(g_player.x,g_player.y,g_rays[ray_i].wall_hit_v_x,g_rays[ray_i].wall_hit_v_y);
 	else
-	{
 		g_rays[ray_i].v_distance = MAXFLOAT;
-	}
 	if (g_rays[ray_i].v_distance > g_rays[ray_i].h_distance )
 	{
 		g_rays[ray_i].wall_hit_x = g_rays[ray_i].wall_hit_h_x;
@@ -116,7 +114,6 @@ void	shortest_cast(int ray_i)
 		g_rays[ray_i].wall_hit_y = g_rays[ray_i].wall_hit_v_y;
 		g_rays[ray_i].distance = g_rays[ray_i].v_distance;
 		g_rays[ray_i].is_wall_v = 1;
-
 	}
 }
 

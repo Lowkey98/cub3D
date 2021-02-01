@@ -176,7 +176,8 @@ typedef struct s_texture
 
 }t_texture;
 t_texture g_texture;
-
+int g_sprite_height;
+int g_sprite_width;
 void fetch_c(char *str);
 int		rgb_to_int(int t, int r, int g, int b);
 int*	initialize_rgb(int *rgb);

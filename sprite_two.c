@@ -1,42 +1,55 @@
 # include "includes/cub3d.h"
 
-int	 x_valid(t_sprite *sprite, int i)
+int	 protect_x(t_sprite *sprite, int i)
 {
 	int valid;
 	valid = 1;
 	if (sprite->x_offset + i < 0 ||
-				sprite->x_offset + i > g_data.window_width)
-			valid = 0;
-		if ((int)sprite->x_offset + i >= g_num_rays)
-			valid = 0;
-		if (sprite->distance > g_rays[(int)sprite->x_offset + i].distance)
-			valid = 0;
+				 (int)sprite->x_offset + i >= g_num_rays ||
+			 sprite->distance > g_rays[(int)sprite->x_offset + i].distance)
+				valid = 0;
 	return (valid);
 }
+void	draw_sprite(t_sprite *sprite, int i, int j)
+{
+	int color;
 
-void	draw_sprite(t_sprite *sprite)
+	color = g_texture.sprite_texture[((int)g_sprite_width* (j * \
+	(int)g_sprite_height/
+			(int)sprite->size)) + (i * (int)g_sprite_width /
+			(int)sprite->size)];
+	if (color != 0 && (sprite->y_offset + j ) > 0 )
+	{
+		my_mlx_pixel_put(&g_mlx, sprite->x_offset + i,sprite->y_offset + j ,color);
+	}
+	//printf("AAAAAA\n");
+}
+void	start_draw_sprite(t_sprite *sprite)
 {
 	int i;
 	int j;
 
 	i = 0;
 	j = 0;
-	while (i < sprite->size)
+	while (i < sprite->size + 1)
 	{
-		if (!x_valid(sprite,i))
+		if (!protect_x(sprite,i))
 		{
 			i++;
 			continue;
 		}
 		j = 0;
-		while (j < sprite->size)
+		while (j < sprite->size - 1)
 		{
+
 			if (sprite->y_offset + j < 0 ||
-					sprite->y_offset + j > g_data.window_height)
+					sprite->y_offset + j >= g_data.window_height)
 			{
 				j++;
 				continue;
 			}
+			draw_sprite(sprite, i, j);
+			j++;
 		}
 		i++;
 	}
@@ -58,14 +71,14 @@ void render_sprite(t_sprite *sprite)
 	sprite->y_offset = (g_data.window_height / 2) - (sprite->size / 2);
 	sprite->x_offset = ((s_angle * g_data.window_width) / g_fov_angle) +
 		((g_data.window_width / 2) - (sprite->size / 2));
-		draw_sprite(sprite);
+		start_draw_sprite(sprite);
 }
 void render_sprites()
 {
 	t_list *new;
 
 	new = g_sprite_h;
-	while (new)
+	if(new)
 	{
 		render_sprite((t_sprite *) new ->content);
 		new = new ->next;

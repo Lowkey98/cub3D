@@ -67,6 +67,6 @@ void	sprite()
 {
 	sprite_distance();
 	sort_sprites();
-	print_distance();
+	//print_distance();
 	render_sprites();
 }
