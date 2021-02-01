@@ -26,7 +26,6 @@ void	draw_sprite(t_sprite *sprite, int i, int j)
 	{
 		my_mlx_pixel_put(&g_mlx, sprite->x_offset + i,sprite->y_offset + j ,color);
 	}
-	//printf("AAAAAA\n");
 }
 void	start_draw_sprite(t_sprite *sprite)
 {
@@ -42,15 +41,6 @@ void	start_draw_sprite(t_sprite *sprite)
 			i++;
 			continue;
 		}
-
-		// if (sprite->x_offset + i < 0 ||
-		// 		 (int)sprite->x_offset + i >= g_num_rays ||
-		// 	 sprite->distance > g_rays[(int)sprite->x_offset + i].distance)
-		// {
-		// 	i++;
-		// 	continue;
-
-		// }
 				j = 0;
 		while (j < sprite->size - 1)
 		{
@@ -76,7 +66,7 @@ void render_sprite(t_sprite *sprite)
 		s_angle -= 2 * M_PI;
 	while (s_angle - (g_player.rotation_angle) < -M_PI)
 		s_angle += 2 * M_PI;
-	s_angle = s_angle - (g_player.rotation_angle);
+	s_angle -= g_player.rotation_angle;
 	if (g_data.window_height > g_data.window_width)
 		sprite->size = (g_data.window_height/ sprite->distance) * g_tile_size;
 	else

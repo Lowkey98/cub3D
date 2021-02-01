@@ -60,9 +60,9 @@ void	fetch_element(char *str)
 		else if(*str == 'N')
 			fetch_no(str);
 		else if (*str == 'C' && *(str + 1) == ' ')
-			fetch_c(str + 2);
+			fetch_c(str);
 		else if (*str == 'F' && *(str + 1) == ' ')
-			fetch_f(str + 2);
+			fetch_f(str);
 		else if (*str == 'E')
 			fetch_ea(str);
 		else if (*str == 'W')

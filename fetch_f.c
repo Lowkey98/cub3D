@@ -16,7 +16,7 @@ int fetch_f_r(int i,int *rgb,char * str)
 	int j;
 
 	j = 0;
-	rgb[0] = ft_atoi(str);
+	rgb[0] = ft_atoi(str + i);
 	if (!ft_isdigit(str[i]))
 		ft_error("error information r in F");
 	while (ft_isdigit(str[i]))
@@ -78,7 +78,7 @@ void fetch_f(char *str)
 	int i;
 	int rgb[3];
 
-	i = 0;
+	i = 2;
 	initialize_rgb(rgb);
 	while (str[i] == ' ')
 		i++;

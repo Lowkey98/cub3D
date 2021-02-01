@@ -18,7 +18,7 @@ void	add_spaces()
 		tmp = calloc(tmplen + 1,1);
 		tmp = ft_memset(tmp,' ',tmplen);
 		g_data.map[i] = ft_strjoin(g_data.map[i],tmp);
-
+		free(tmp);
 		i++;
 
 

@@ -16,7 +16,8 @@ int fetch_c_r(int i,int *rgb,char * str)
 	int j;
 
 	j = 0;
-	rgb[0] = ft_atoi(str);
+	rgb[0] = ft_atoi(str + i);
+	printf("aaaa%d",rgb[0]);
 	if (!ft_isdigit(str[i]))
 		ft_error("error information r in F");
 	while (ft_isdigit(str[i]))
@@ -39,6 +40,7 @@ int fetch_c_g(int i, int *rgb, char* str)
 
 	j = 0;
 	rgb[1] = ft_atoi(str + i);
+	printf("qqq%d\n",rgb[1]);
 	while (str[i] == ' ')
 		i++;
 	while (ft_isdigit(str[i]))
@@ -61,6 +63,7 @@ int fetch_c_b(int i, int *rgb, char *str)
 
 	j = 0;
 	rgb[2] = ft_atoi(str + i);
+	printf("\n%d\n",rgb[2]);
 	while (str[i] == ' ')
 		i++;
 	while (ft_isdigit(str[i]))
@@ -78,7 +81,7 @@ void fetch_c(char *str)
 	int i;
 	int rgb[3];
 
-	i = 0;
+	i = 2;
 	initialize_rgb(rgb);
 	while (str[i] == ' ')
 		i++;

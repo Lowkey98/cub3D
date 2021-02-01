@@ -43,8 +43,8 @@ void	fill_image(unsigned char *header, t_bmp header_info, char *buf)
 	write(fd, header, 54);
 	write(fd, buf, header_info.image_size);
 	close(fd);
-	//free(header_info.buf);
-	//free(header);
+	free(header_info.buf);
+	free(header);
 	exit(0);
 }
 

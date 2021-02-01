@@ -133,15 +133,21 @@ int read_file()
 	while(i)
 	{
 		i = get_next_line(fd,&line);
+		g_str = line;
 			if(!reached_map())
 			{
 				if(!empty_line(line))
 					fetch_element(line);
+				free(line);
 			}
 			else
+			{
 				map_str = ft_strjn(map_str,line);
+				free(line);
+			}
 	}
 	fetch_map(map_str);
 	g_data.map_height = map_height();
+	free(map_str);
     return (0);
 }

@@ -1,4 +1,4 @@
-R 120 120
+R 1200 1200
 
 NO ./texture_east.xpm
 SO ./texture_east.xpm
@@ -6,8 +6,10 @@ WE ./texture_east.xpm
 EA ./texture_east.xpm
 S ./sprite.xpm
 
-F 220,100,255
-C 225,30,0
+F 255, 32, 82
+
+C 255, 32, 82
+
 
 
         1111111111111111111111111

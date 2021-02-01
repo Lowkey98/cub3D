@@ -3,7 +3,7 @@ void    draw_sky(float y, int i,float *j)
 {
     while (*j < y)
     {
-        my_mlx_pixel_put(&g_mlx, i, *j,PURPLE);
+        my_mlx_pixel_put(&g_mlx, i, *j,g_data.c_color);
         (*j)++;
     }
 }

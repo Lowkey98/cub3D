@@ -178,6 +178,7 @@ typedef struct s_texture
 t_texture g_texture;
 int g_sprite_height;
 int g_sprite_width;
+char *g_str;
 void	check_mapstr_error(char *map_str);
 void	check_player();
 void	add_spaces();
