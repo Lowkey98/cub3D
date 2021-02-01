@@ -4,7 +4,7 @@ int		*get_colors(int color)
 	int		*colors;
 
 	if (!(colors = malloc(3 * sizeof(int))))
-		ft_error("malloc fail");
+		ft_error_map("malloc fail");
 	colors[0] = ((color >> 16) & 0xFF);
 	colors[1] = ((color >> 8) & 0xFF);
 	colors[2] = ((color) & 0xFF);
@@ -57,7 +57,7 @@ void	ft_screenshot(void)
 	header = ft_calloc(54, sizeof(unsigned char));
 	fill_header(header, &info, 10);
 	if (!(info.buf = malloc(info.image_size)))
-		ft_error("malloc failed");
+		ft_error_map("malloc failed");
 	while (info.row > 0)
 	{
 		info.col = 0;

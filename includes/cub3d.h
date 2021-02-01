@@ -178,7 +178,8 @@ typedef struct s_texture
 t_texture g_texture;
 int g_sprite_height;
 int g_sprite_width;
-char *g_str;
+void ft_error_first(char *message);
+void ft_error_map(char *message);
 void	check_mapstr_error(char *map_str);
 void	check_player();
 void	add_spaces();
@@ -220,7 +221,7 @@ void   draw_player();
 void    fetch_player_info();
 char	*ft_strjn(char *s1, char *s2);
 int		empty_line(char *str);
-void    ft_error(char *message);
+void    ft_error(char *message, char *str);
 int is_wall_at(float x, float y);
 int read_file();
 void    cast_rays();

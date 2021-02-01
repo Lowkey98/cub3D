@@ -72,7 +72,7 @@ void	fetch_element(char *str)
 		else if (*str == 'S' && *(str + 1) == ' ')
 			fetch_s(str);
 		else
-			ft_error("element not known");
+			ft_error("element not known",str);
 }
 
 

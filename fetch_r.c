@@ -7,7 +7,7 @@ int fetch_r_w(char *str, int i)
 	while (str[i] == ' ')
 		i++;
 	if (str[i] == '0' || !ft_isdigit(str[i]))
-		ft_error("error in resolution");
+		ft_error("error in resolution",str);
 	g_data.window_width = ft_atoi(str + i);
 	while (ft_isdigit(str[i]))
 	{
@@ -15,7 +15,7 @@ int fetch_r_w(char *str, int i)
 		i++;
 	}
 	if (str[i] != ' ')
-		ft_error("error in resolution");
+		ft_error("error in resolution",str);
 	if (g_data.window_width >= 2560 || j > 4)
 		g_data.window_width = 2560;
 	return (i);
@@ -30,14 +30,14 @@ int fetch_r_h(char *str, int i)
 
 	g_data.window_height = ft_atoi(str + i);
 	if (str[i] == '0' || !ft_isdigit(str[i]))
-		ft_error("error in resolution");
+		ft_error("error in resolution",str);
 	while (ft_isdigit(str[i]))
 	{
 		j++;
 		i++;
 	}
 	if (str[i] != '\0')
-		ft_error("error in resolution");
+		ft_error("error in resolution",str);
 	if (g_data.window_height >= 1440 || j > 4)
 		g_data.window_height = 1440;
 	return (i);

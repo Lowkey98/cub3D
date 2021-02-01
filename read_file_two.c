@@ -9,7 +9,7 @@ void fetch_s(char *str)
 		i++;
 	tmp = mlx_xpm_file_to_image(g_mlx.ptr, str + i,&g_sprite_width,&g_sprite_height);
 	if (tmp == NULL)
-		ft_error("ERROR\n South texture file doesnt exist");
+		ft_error("ERROR\n South texture file doesnt exist",str);
 	g_texture.sprite_texture= (int *)mlx_get_data_addr(tmp, &i,&i,&i);
 
 	g_data.s_completed = 1;
@@ -24,10 +24,10 @@ void fetch_ea(char *str)
 		i++;
 	tmp = mlx_xpm_file_to_image(g_mlx.ptr, str + i,&i,&i);
 	if (tmp == NULL)
-		ft_error("ERROR\n East texture file doesnt exist");
+		ft_error("ERROR\n East texture file doesnt exist",str);
 	g_texture.east_texture = (int *)mlx_get_data_addr(tmp, &i,&i,&i);
 	if (g_texture.east_texture == NULL)
-		ft_error("ERROR \n East texture file  isnt readable");
+		ft_error("ERROR \n East texture file  isnt readable",str);
 
 	g_data.ea_completed = 1;
 
@@ -41,10 +41,10 @@ void fetch_we(char *str)
 		i++;
 	tmp = mlx_xpm_file_to_image(g_mlx.ptr, str + i,&g_texture.west_texture_w,&g_texture.west_texture_h);
 	if (tmp == NULL)
-		ft_error("ERROR\n West texture file doesnt exist");
+		ft_error("ERROR\n West texture file doesnt exist",str);
 	g_texture.west_texture = (int *)mlx_get_data_addr(tmp, &i,&i,&i);
 	if (g_texture.west_texture == NULL)
-		ft_error("ERROR \n West texture file  isnt readable");
+		ft_error("ERROR \n West texture file  isnt readable",str);
 
 	g_data.we_completed = 1;
 
@@ -58,10 +58,10 @@ void fetch_so(char *str)
 		i++;
 	tmp = mlx_xpm_file_to_image(g_mlx.ptr, str + i,&i,&i);
 	if (tmp == NULL)
-		ft_error("ERROR\n South texture file doesnt exist");
+		ft_error("ERROR\n South texture file doesnt exist",str);
 	g_texture.south_texture = (int *)mlx_get_data_addr(tmp, &i,&i,&i);
 	if (g_texture.south_texture == NULL)
-		ft_error("ERROR \n South texture file  isnt readable");
+		ft_error("ERROR \n South texture file  isnt readable",str);
 
 	g_data.so_completed = 1;
 
@@ -76,7 +76,7 @@ void fetch_no(char *str)
 		i++;
 	tmp = mlx_xpm_file_to_image(g_mlx.ptr, str + i,&i,&i);
 	if (tmp == NULL)
-		ft_error("ERROR\n Invalid North texture file");
+		ft_error("ERROR\n Invalid North texture file",str);
 	g_texture.north_texture = (int *)mlx_get_data_addr(tmp, &i,&i,&i);
 
 

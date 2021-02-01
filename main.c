@@ -62,14 +62,14 @@ int	key_press(int key)
 void check_arg(int argc,char **argv)
 {
 	if (argc != 2 && argc != 3)
-        ft_error("format should be ./cub3d ");
+        ft_error_first("format should be ./cub3d ");
 	char *dot = strrchr((const char*)argv[1], (int)'.');
 		if (dot && strcmp((const char*)dot, ".cub"))
-			ft_error("false");
+			ft_error_first(".cub at the end needed");
 	if (argc == 3)
 	{
 		if (strcmp(argv[2], "--save"))
-			ft_error("third argument can only be --save");
+			ft_error_first("third argument can only be --save");
 		else
 			g_save_flag = 1;
 	}

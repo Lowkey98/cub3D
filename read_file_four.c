@@ -46,12 +46,12 @@ void	add_spaces()
 	// }
 	// printf("%s",g_data->map[1]);
 }
-void	check_player()
+void	check_player(char *map_str)
 {
 	if (g_player.exists == 0)
 		g_player.exists = 1;
 	else
-		ft_error("there should be only one player");
+		ft_error("there should be only one player",map_str);
 
 }
 void	check_mapstr_error(char *map_str)
@@ -62,18 +62,18 @@ void	check_mapstr_error(char *map_str)
 	while (map_str[i] == '\n')
 		i++;
 	if (map_str[i] == '\0')
-		ft_error("no map");
+		ft_error("no map",map_str);
 	while (map_str[i])
 	{
 		if (map_str[i] == '\n' && map_str[i + 1] == '\n')
-			ft_error("ERROR \nempty line in the map");
+			ft_error("ERROR \nempty line in the map",map_str);
 		if (map_str[i] == 'N' || map_str[i] == 'S' || map_str[i] == 'E' || map_str[i] == 'W')
-			check_player();
+			check_player(map_str);
 		else if (map_str[i] != '1' && map_str[i] != '0' && map_str[i] != ' ' && map_str[i] != '\n' && map_str[i] != '2')
-			ft_error("ERROR \nbad character in the map");
+			ft_error("ERROR \nbad character in the map",map_str);
 		i++;
 	}
 	if (g_player.exists == 0)
-		ft_error("no player nor surface to use");
+		ft_error("no player nor surface to use",map_str);
 
 }

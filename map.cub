@@ -1,4 +1,4 @@
-R 1200 1200
+R 12 12
 
 NO ./texture_east.xpm
 SO ./texture_east.xpm

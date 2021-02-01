@@ -41,13 +41,13 @@ void	check_map_frame()
 	{
 		//ft_putnbr(g_data->map_lenght - 1);
 		if (g_data.map[i][0] == '0' || g_data.map[i][g_data.map_lenght - 1] == '0' || g_data.map[i][0] == '2' || g_data.map[i][g_data.map_lenght - 1] == '2' )
-			ft_error("ERROR\n error at the edge of the map");
+			ft_error_map("ERROR\n error at the edge of the map");
 		i++;
 	}
 	while(g_data.map[0][j])
 	{
 		if (g_data.map[0][j] == '0' || g_data.map[i - 1][j] == '0' || g_data.map[0][j] == '2' || g_data.map[i - 1][j] == '2')
-			ft_error("ERROR\n error at the edge of the map");
+			ft_error_map("ERROR\n error at the edge of the map");
 		j++;
 	}
 
@@ -67,7 +67,7 @@ void	check_map_error()
 		{
 			if (g_data.map[i + 1][j + 1] == '0' || g_data.map[i + 1][j + 1] == 'N' || g_data.map[i + 1][j + 1] == 'S' || g_data.map[i + 1][j + 1] == 'W' || g_data.map[i + 1][j + 1] == 'E' || g_data.map[i + 1][j + 1] == '2')
 				if (g_data.map[i + 1][j] == ' ' || g_data.map[i][j + 1] == ' ' || g_data.map[i + 1][j + 2] == ' ' || g_data.map[i + 2][j + 1] == ' ')
-					ft_error("ERROR\n invalid character next to space");
+					ft_error_map("ERROR\n invalid character next to space");
 			if (g_data.map[i][j] == '2')
 				fetch_sprite_position(i,j);
 			j++;
@@ -81,9 +81,9 @@ void	fetch_map(char *map_str)
 {
 	// int i = 0;
 	if (!g_data.r_completed)
-		ft_error("empty file");
+		ft_error("empty file",map_str);
 	if (*map_str == '\0')
-		ft_error("there is no map");
+		ft_error("there is no map",map_str);
 		check_mapstr_error(map_str);
 		g_data.map = ft_split(map_str,'\n');
 		g_data.map_lenght = max_lenght();
@@ -129,11 +129,10 @@ int read_file()
 	i = 1;
 	map_str = ft_calloc(1,1);
 	if ((fd = open(g_data.map_name,O_RDONLY)) == -1)
-		ft_error("file cant be opened");
+		ft_error("file cant be opened",map_str);
 	while(i)
 	{
 		i = get_next_line(fd,&line);
-		g_str = line;
 			if(!reached_map())
 			{
 				if(!empty_line(line))
