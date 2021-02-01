@@ -178,6 +178,7 @@ typedef struct s_texture
 t_texture g_texture;
 int g_sprite_height;
 int g_sprite_width;
+int			ft_exit(void);
 void ft_error_first(char *message);
 void ft_error_map(char *message);
 void	check_mapstr_error(char *map_str);

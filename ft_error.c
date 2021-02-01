@@ -1,5 +1,10 @@
 # include "includes/libft.h"
 # include "includes/cub3d.h"
+int			ft_exit(void)
+{
+	mlx_destroy_window(g_mlx.ptr, g_mlx.win);
+	exit(0);
+}
 void ft_error_first(char *message)
 {
 	ft_putstr(message);

@@ -81,7 +81,7 @@ void render_sprites()
 	t_list *new;
 
 	new = g_sprite_h;
-	if(new)
+	while(new)
 	{
 		render_sprite((t_sprite *) new ->content);
 		new = new ->next;

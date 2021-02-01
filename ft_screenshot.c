@@ -45,7 +45,7 @@ void	fill_image(unsigned char *header, t_bmp header_info, char *buf)
 	close(fd);
 	free(header_info.buf);
 	free(header);
-	exit(0);
+	ft_exit();
 }
 
 void	ft_screenshot(void)

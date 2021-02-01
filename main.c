@@ -28,9 +28,9 @@ int	key_press(int key)
 {
     if (key == 53 || key == 12)
         exit(1);
-	if (key == UP_ARROW)
+	if (key == 13)
 	    g_player.walk_direction = 1;
-	else if (key == DOWN_ARROW)
+	else if (key == 1)
 		g_player.walk_direction = -1;
 	else if (key == LEFT_ARROW)
 	    g_player.turn_direction = -1;
@@ -41,6 +41,7 @@ int	key_press(int key)
 		g_a = PI/2;
 		g_player.walk_direction = -1 + key;
 	}
+	//printf("key === >  %d\n",key);
 
     //ft_putnbr(5);
     clear();
@@ -81,7 +82,7 @@ int main(int argc,char **argv)
     g_mlx.ptr = mlx_init();
     read_file();
 	g_num_rays = g_data.window_width;
-    g_mlx.win = mlx_new_window(g_mlx.ptr, g_data.window_width  ,g_data.window_height,"cub3d");
+    g_mlx.win = mlx_new_window(g_mlx.ptr, g_data.window_width  ,g_data.window_height,"cub3D");
     g_mlx.img = mlx_new_image(g_mlx.ptr,g_data.window_width,g_data.window_height);
     g_mlx.addr = mlx_get_data_addr(g_mlx.img, &g_mlx.bits_per_pixel,&g_mlx.line_length,&g_mlx.endian);
     //draw_map();

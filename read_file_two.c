@@ -9,7 +9,7 @@ void fetch_s(char *str)
 		i++;
 	tmp = mlx_xpm_file_to_image(g_mlx.ptr, str + i,&g_sprite_width,&g_sprite_height);
 	if (tmp == NULL)
-		ft_error("ERROR\n South texture file doesnt exist",str);
+		ft_error("ERROR\n Sprite file not valid",str);
 	g_texture.sprite_texture= (int *)mlx_get_data_addr(tmp, &i,&i,&i);
 
 	g_data.s_completed = 1;

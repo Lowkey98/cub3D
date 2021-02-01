@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fetch_c.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayafdel <ayafdel@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/01 19:03:28 by ayafdel           #+#    #+#             */
+/*   Updated: 2021/02/01 19:03:29 by ayafdel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 # include "includes/cub3d.h"
 
 void check_rgb_c(int *rgb, char *str)
@@ -17,7 +29,7 @@ int fetch_c_r(int i,int *rgb,char * str)
 
 	j = 0;
 	rgb[0] = ft_atoi(str + i);
-	printf("aaaa%d",rgb[0]);
+	// printf("aaaa%d",rgb[0]);
 	if (!ft_isdigit(str[i]))
 		ft_error("error information r in F",str);
 	while (ft_isdigit(str[i]))
@@ -40,7 +52,7 @@ int fetch_c_g(int i, int *rgb, char* str)
 
 	j = 0;
 	rgb[1] = ft_atoi(str + i);
-	printf("qqq%d\n",rgb[1]);
+	// printf("qqq%d\n",rgb[1]);
 	while (str[i] == ' ')
 		i++;
 	while (ft_isdigit(str[i]))
@@ -63,9 +75,12 @@ int fetch_c_b(int i, int *rgb, char *str)
 
 	j = 0;
 	rgb[2] = ft_atoi(str + i);
-	printf("\n%d\n",rgb[2]);
+	// printf("\n%d\n",rgb[2]);
 	while (str[i] == ' ')
 		i++;
+	if (!ft_isdigit(str[i]))
+		ft_error("invalid rgb in c",str);
+
 	while (ft_isdigit(str[i]))
 	{
 		//printf("a %c \n",str[i]);
