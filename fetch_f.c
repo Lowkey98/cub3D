@@ -13,14 +13,18 @@ void check_rgb_f(int *rgb)
 
 int fetch_f_r(int i,int *rgb,char * str)
 {
+	int j;
+
+	j = 0;
 	rgb[0] = ft_atoi(str);
 	if (!ft_isdigit(str[i]))
 		ft_error("error information r in F");
 	while (ft_isdigit(str[i]))
 	{
-		if (i == 3)
+		if (j == 3)
 			ft_error("max rgb == 255");
 		i++;
+		j++;
 	}
 	while (str[i] == ' ')
 		i++;
@@ -76,6 +80,8 @@ void fetch_f(char *str)
 
 	i = 0;
 	initialize_rgb(rgb);
+	while (str[i] == ' ')
+		i++;
 	i = fetch_f_r(i,rgb,str);
 	i = fetch_f_g(i,rgb,str);
 	i = fetch_f_b(i,rgb,str);

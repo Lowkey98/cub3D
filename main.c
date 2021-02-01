@@ -115,7 +115,7 @@ int	key_press(int key)
 
     //ft_putnbr(5);
     clear();
-    draw_map();
+    //draw_map();
     move_player();
     rotate_player();
     //draw_player();
@@ -155,7 +155,7 @@ int main(int argc,char **argv)
     g_mlx.win = mlx_new_window(g_mlx.ptr, g_data.window_width  ,g_data.window_height,"cub3d");
     g_mlx.img = mlx_new_image(g_mlx.ptr,g_data.window_width,g_data.window_height);
     g_mlx.addr = mlx_get_data_addr(g_mlx.img, &g_mlx.bits_per_pixel,&g_mlx.line_length,&g_mlx.endian);
-    draw_map();
+    //draw_map();
     fetch_player_info();
     g_rays = malloc((g_num_rays) *  sizeof(t_rays));
     cast_rays();

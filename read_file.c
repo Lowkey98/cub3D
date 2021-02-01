@@ -169,12 +169,13 @@ void fetch_r(char *str)
 		i++;
 	}
 	if (str[i] != ' ')
-		ft_error("no space");
+		ft_error("error in resolution");
 	while (str[i] == ' ')
 		i++;
+	if (g_data.window_width > 2500 || j > 4)
+		g_data.window_width = 2500;
 	g_data.window_height = ft_atoi(str + i);
-	if (g_data.window_height > 2500 || j > 4)
-		printf("kbir sghrnah");
+
 	j = 0;
 	while (ft_isdigit(str[i]))
 	{
@@ -183,10 +184,10 @@ void fetch_r(char *str)
 	}
 	if (str[i] != '\0')
 		ft_error("error in resolution");
-
-	if (g_data.window_width > 2500 || j > 4)
-		printf("kbir sghrnah");
-	g_data.r_completed = 1;
+	if (g_data.window_height > 2500 || j > 4)
+		g_data.window_height = 1500;
+	printf("%d \n %d \n",g_data.window_width,g_data.window_height);
+		g_data.r_completed = 1;
 }
 
 // char *fetch_f(char *str)
@@ -246,7 +247,7 @@ int  check_num(char *str)
 void	fetch_element(char *str)
 {
 	 //forcomp
-		if (*str == 'R')
+		if (*str == 'R' && *(str + 1) == ' ')
 			fetch_r(str);
 		else if(*str == 'N')
 			fetch_no(str);
@@ -353,6 +354,8 @@ void	check_mapstr_error(char *map_str)
 	i = 0;
 	while (map_str[i] == '\n')
 		i++;
+	if (map_str[i] == '\0')
+		ft_error("no map");
 	while (map_str[i])
 	{
 		if (map_str[i] == '\n' && map_str[i + 1] == '\n')
@@ -364,7 +367,7 @@ void	check_mapstr_error(char *map_str)
 		i++;
 	}
 	if (g_player.exists == 0)
-		ft_error("there is no player");
+		ft_error("no player nor surface to use");
 
 }
 void	check_map_frame()

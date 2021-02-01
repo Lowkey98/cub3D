@@ -1,5 +1,5 @@
 CC		:= gcc
-CFLAGS	:= -Wall -Werror -Wextra  -g -O3
+CFLAGS	:= -Wall -Werror -Wextra  -fsanitize=address -g -O3
 NAME	:= cub3D
 SRC		:= fetch_c.c rgb.c fetch_f.c sprite_two.c sprite.c linked.c main.c ft_screenshot.c  render_walls.c cast_rays.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c ft_error.c read_file.c render_map.c cub3d_utils.c mlx.c
 SRC_PATH := srcs
