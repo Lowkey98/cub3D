@@ -1,5 +1,5 @@
 {
-    "files.associations": {
+	"files.associations": {
 		"locale": "c",
 		"__hash_table": "c",
 		"__split_buffer": "c",

@@ -3,10 +3,10 @@ NO ./texture_east.xpm
 SO ./texture_east.xpm
 R  1222 1230
 C 244, 24,23
-WE 
-EA     ./texture_east.xpm
+WE ./texture_east.xpm
+EA ./texture_east.xpm
 
-S     ./sprite.xpm
+S  ./sprite.xpm
 
 F 255, 32, 82
 1111111111

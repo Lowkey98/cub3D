@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayafdel <ayafdel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/13 15:20:53 by ayafdel           #+#    #+#             */
-/*   Updated: 2020/12/07 20:01:28 by ayafdel          ###   ########.fr       */
+/*   Created: 2021/02/02 15:44:36 by ayafdel           #+#    #+#             */
+/*   Updated: 2021/02/02 15:44:37 by ayafdel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
+
 int		get_next_line(int fd, char **line);
 char	*ft_strjoin(char *s1, char *s2);
 int		ft_strlen(char *str);

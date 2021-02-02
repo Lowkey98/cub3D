@@ -1,4 +1,17 @@
-# include "includes/cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   linked.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayafdel <ayafdel@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/02 14:59:12 by ayafdel           #+#    #+#             */
+/*   Updated: 2021/02/02 14:59:13 by ayafdel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "includes/cub3d.h"
+
 t_list	*ft_lstnew(void *content)
 {
 	t_list *new;
@@ -10,6 +23,7 @@ t_list	*ft_lstnew(void *content)
 	new->next = NULL;
 	return (new);
 }
+
 t_list	*ft_lstlast(t_list *lst)
 {
 	t_list *current;

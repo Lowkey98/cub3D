@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayafdel <ayafdel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/01 19:13:40 by ayafdel           #+#    #+#             */
-/*   Updated: 2021/02/02 09:52:54 by ayafdel          ###   ########.fr       */
+/*   Created: 2021/02/02 14:45:01 by ayafdel           #+#    #+#             */
+/*   Updated: 2021/02/02 14:51:54 by ayafdel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	initialize_cast_data(int ray_i)
 	g_rays[ray_i].is_ray_facing_up = 0;
 	g_rays[ray_i].is_ray_facing_right = 0;
 	g_rays[ray_i].is_ray_facing_down = 0;
+	g_rays[ray_i].is_wall_h = 0;
+	g_rays[ray_i].is_wall_v = 0;
 }
 
 void	horizontal_cast(int ray_i)

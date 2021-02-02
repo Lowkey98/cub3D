@@ -9,6 +9,7 @@ int	key_hook(int keycode, t_vars *vars)
 {
 	printf("%d",keycode);
 }
+
 int main()
 {
 	t_vars vars;

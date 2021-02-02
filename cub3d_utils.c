@@ -1,5 +1,18 @@
-# include "includes/libft.h"
-# include "includes/cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayafdel <ayafdel@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/02 14:53:13 by ayafdel           #+#    #+#             */
+/*   Updated: 2021/02/02 14:55:43 by ayafdel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "includes/libft.h"
+#include "includes/cub3d.h"
+
 char	*ft_strjn(char *s1, char *s2)
 {
 	char		*temp;
@@ -10,8 +23,7 @@ char	*ft_strjn(char *s1, char *s2)
 	i = 0;
 	while (s2[i] != 0)
 		i++;
-	if ((temp = malloc(ft_strlen(s1) + i + 2)) == 0)
-		return (NULL);
+	temp = malloc(ft_strlen(s1) + i + 2);
 	i = 0;
 	while (s1[i] != '\0')
 	{
@@ -24,12 +36,13 @@ char	*ft_strjn(char *s1, char *s2)
 		i++;
 		j++;
 	}
-    temp[i] = '\n';
+	temp[i] = '\n';
 	temp[i + 1] = '\0';
 	free(s1);
 	return (temp);
 }
-int empty_line(char *str)
+
+int		empty_line(char *str)
 {
 	int i;
 
@@ -42,4 +55,3 @@ int empty_line(char *str)
 	}
 	return (1);
 }
-
