@@ -1,4 +1,17 @@
-# include "includes/cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_screenshot.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayafdel <ayafdel@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/02 09:15:37 by ayafdel           #+#    #+#             */
+/*   Updated: 2021/02/02 09:16:32 by ayafdel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "includes/cub3d.h"
+
 int		*get_colors(int color)
 {
 	int		*colors;
@@ -10,6 +23,7 @@ int		*get_colors(int color)
 	colors[2] = ((color) & 0xFF);
 	return (colors);
 }
+
 void	fill_header(unsigned char *header, t_bmp *info, int i)
 {
 	info->width = g_data.window_width;
@@ -51,7 +65,7 @@ void	fill_image(unsigned char *header, t_bmp header_info, char *buf)
 void	ft_screenshot(void)
 {
 	int				*color;
-	t_bmp		info;
+	t_bmp			info;
 	unsigned char	*header;
 
 	header = ft_calloc(54, sizeof(unsigned char));
@@ -64,7 +78,7 @@ void	ft_screenshot(void)
 		while (info.col < info.width)
 		{
 			color = get_colors(info.data[(g_data.window_height - info.row) * \
-				g_data.window_width+ info.col]);
+				g_data.window_width + info.col]);
 			info.buf[info.row * info.w_in_b + info.col * 3 + 0] = color[2];
 			info.buf[info.row * info.w_in_b + info.col * 3 + 1] = color[1];
 			info.buf[info.row * info.w_in_b + info.col * 3 + 2] = color[0];

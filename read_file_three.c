@@ -1,14 +1,18 @@
-# include "includes/cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_file_three.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayafdel <ayafdel@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/02 09:41:18 by ayafdel           #+#    #+#             */
+/*   Updated: 2021/02/02 09:51:50 by ayafdel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int		reach_map(t_struct *g_data)
-{
-	g_data = 0;
-	//if(g_data -> r_check)
-		//return (1);
-		return (0);
-}
+#include "includes/cub3d.h"
 
-char *skip_empty_lines(char *str)
+char	*skip_empty_lines(char *str)
 {
 	int i;
 	int j;
@@ -23,64 +27,41 @@ char *skip_empty_lines(char *str)
 	}
 	return (str + j);
 }
-int	reached_map()
+
+int		reached_map(void)
 {
-	if (g_data.s_completed && g_data.r_completed && g_data.c_completed && g_data.f_completed && g_data.no_completed && g_data.so_completed && g_data.ea_completed && g_data.we_completed)
+	if (g_data.s_completed && g_data.r_completed && g_data.c_completed
+	&& g_data.f_completed && g_data.no_completed && g_data.so_completed
+	&& g_data.ea_completed && g_data.we_completed)
 	{
-		//printf("%d",g_data->r_completed);
 		return (1);
 	}
-			//printf("%d",g_data->r_completed);
 	return (0);
 }
-// void    fetch_data(char *str, t_struct *g_data)
-// {
-//     while(!reached_map(g_data))
-// 	{
-// 		str = fetch_element(str, g_data);
-// 		///printf("a");
-// 	}
-
-// }
-// void fetch_f_r(char **tmp)
-// {
-// 	int i;
-
-// 	i = 0;
-
-
-// }
-
 
 void	fetch_element(char *str)
 {
-	 //forcomp
-		if (*str == 'R' && *(str + 1) == ' ')
-			fetch_r(str);
-		else if(*str == 'N')
-			fetch_no(str);
-		else if (*str == 'C' && *(str + 1) == ' ')
-			fetch_c(str);
-		else if (*str == 'F' && *(str + 1) == ' ')
-			fetch_f(str);
-		else if (*str == 'E')
-			fetch_ea(str);
-		else if (*str == 'W')
-			fetch_we(str);
-		else if (*str == 'S' && *(str + 1) == 'O')
-			fetch_so(str);
-		else if (*str == 'S' && *(str + 1) == ' ')
-			fetch_s(str);
-		else
-			ft_error("error in elements",str);
+	if (*str == 'R' && *(str + 1) == ' ')
+		fetch_r(str);
+	else if (*str == 'N')
+		fetch_no(str);
+	else if (*str == 'C' && *(str + 1) == ' ')
+		fetch_c(str);
+	else if (*str == 'F' && *(str + 1) == ' ')
+		fetch_f(str);
+	else if (*str == 'E')
+		fetch_ea(str);
+	else if (*str == 'W')
+		fetch_we(str);
+	else if (*str == 'S' && *(str + 1) == 'O')
+		fetch_so(str);
+	else if (*str == 'S' && *(str + 1) == ' ')
+		fetch_s(str);
+	else
+		ft_error("error in elements", str);
 }
 
-
-// void	add_spaces(t_struct g_data)
-// {
-
-// }
-int max_lenght()
+int		max_lenght(void)
 {
 	int i;
 	int j;
@@ -97,7 +78,6 @@ int max_lenght()
 			j++;
 			if (j > max)
 				max = j;
-
 		}
 		i++;
 	}

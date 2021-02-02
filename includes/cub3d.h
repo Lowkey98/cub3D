@@ -6,7 +6,7 @@
 /*   By: ayafdel <ayafdel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 13:35:55 by ayafdel           #+#    #+#             */
-/*   Updated: 2020/12/11 13:17:30 by ayafdel          ###   ########.fr       */
+/*   Updated: 2021/02/02 09:41:38 by ayafdel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,6 @@ void fetch_r(char *str);
 int	reached_map();
 void	fetch_element(char *str);
 int max_lenght();
-int		reach_map(t_struct *g_data);
 char *skip_empty_lines(char *str);
 void fetch_no(char *str);
 void fetch_so(char *str);
