@@ -6,7 +6,7 @@
 /*   By: ayafdel <ayafdel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 19:20:45 by ayafdel           #+#    #+#             */
-/*   Updated: 2021/02/02 14:38:46 by ayafdel          ###   ########.fr       */
+/*   Updated: 2021/02/02 16:39:28 by ayafdel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,10 +109,11 @@ int		main(int argc, char **argv)
 	render_walls();
 	sprite();
 	if (g_save_flag == 1)
-		exit(0);
+		ft_screenshot();
 	mlx_put_image_to_window(g_mlx.ptr, g_mlx.win,
 	g_mlx.img, 0, 0);
 	mlx_hook(g_mlx.win, 2, 1L << 0, key_press, (void *)0);
+	mlx_hook(g_mlx.win, 17, 1L << 17, ft_exit, (void *)0);
 	mlx_loop(g_mlx.ptr);
 	return (0);
 }

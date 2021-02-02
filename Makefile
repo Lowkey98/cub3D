@@ -14,5 +14,9 @@ $(NAME): $(SRC)
 
 clean:
 	rm -rf $(NAME)
-re: clean all
+
+fclean: clean
+		make fclean -C $(LIBFT_PATH)
+
+re: fclean all
 

@@ -1,4 +1,16 @@
-char *ft_strcpy(char *dest, char *src)
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayafdel <ayafdel@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/02 16:12:59 by ayafdel           #+#    #+#             */
+/*   Updated: 2021/02/02 16:16:19 by ayafdel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+char	*ft_strcpy(char *dest, char *src)
 {
 	int i;
 
@@ -10,5 +22,4 @@ char *ft_strcpy(char *dest, char *src)
 	}
 	dest[i] = '\0';
 	return (dest);
-
 }
